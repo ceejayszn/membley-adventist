@@ -55,6 +55,20 @@ try {
         time_spent INTEGER DEFAULT 0
     )");
 
+    // 5. Visitor Tracking Table (IPs, Devices, Location, ISPs)
+    $pdo->exec("CREATE TABLE IF NOT EXISTS visitor_tracking (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        ip_address TEXT NOT NULL,
+        user_agent TEXT NOT NULL,
+        device_type TEXT,
+        browser TEXT,
+        location TEXT DEFAULT 'Unknown',
+        network_isp TEXT DEFAULT 'Unknown',
+        time_spent INTEGER DEFAULT 0,
+        last_seen DATETIME DEFAULT CURRENT_TIMESTAMP,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )");
+
     // Insert default admin if users table is empty (admin / admin123)
     $stmt = $pdo->query("SELECT COUNT(*) FROM users");
     if ($stmt->fetchColumn() == 0) {

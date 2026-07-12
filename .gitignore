@@ -1,0 +1,8 @@
+# Database files
+includes/church.db
+*.db
+*.sqlite
+
+# OS files
+.DS_Store
+Thumbs.db

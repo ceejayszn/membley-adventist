@@ -9,6 +9,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membley Seventh-day Adventist Church | Ruiru, Kenya</title>
     <meta name="description" content="Welcome to Membley Seventh-day Adventist Church in Ruiru, Kenya. Join us for Sabbath worship, youth ministries, bible study, and community outreach.">
+    <link rel="icon" type="image/png" href="assets/images/sda_logo.png">
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -45,6 +46,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
                 <li><a href="events.php" class="nav-link <?php echo ($current_page == 'events.php') ? 'active' : ''; ?>">Events</a></li>
                 <li><a href="blog.php" class="nav-link <?php echo ($current_page == 'blog.php' || $current_page == 'blog-single.php') ? 'active' : ''; ?>">Blog / Sermons</a></li>
                 <li><a href="giving.php" class="nav-link <?php echo ($current_page == 'giving.php') ? 'active' : ''; ?>">Giving</a></li>
+                <li><a href="members.php" class="nav-link <?php echo ($current_page == 'members.php') ? 'active' : ''; ?>">Members</a></li>
                 <li><a href="contact.php" class="nav-link <?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">Contact</a></li>
             </ul>
 
@@ -66,6 +68,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
             <li><a href="events.php" class="mobile-nav-link">Events</a></li>
             <li><a href="blog.php" class="mobile-nav-link">Blog & Sermons</a></li>
             <li><a href="giving.php" class="mobile-nav-link">Giving / Pledges</a></li>
+            <li><a href="members.php" class="mobile-nav-link">Members / Registrations</a></li>
             <li><a href="contact.php" class="mobile-nav-link">Contact & Prayer</a></li>
         </ul>
     </nav>

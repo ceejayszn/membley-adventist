@@ -99,6 +99,8 @@ try {
             </div>
             <ul class="sidebar-menu">
                 <li><a href="dashboard.php" class="sidebar-link"><i class="fa-solid fa-gauge" style="margin-right: 0.5rem;"></i> Dashboard</a></li>
+                <li><a href="forms.php" class="sidebar-link"><i class="fa-solid fa-wpforms" style="margin-right: 0.5rem;"></i> Manage Forms</a></li>
+                <li><a href="analytics.php" class="sidebar-link"><i class="fa-solid fa-chart-line" style="margin-right: 0.5rem;"></i> Visitor Analytics</a></li>
                 <li><a href="blogs.php" class="sidebar-link"><i class="fa-solid fa-newspaper" style="margin-right: 0.5rem;"></i> Manage Blogs</a></li>
                 <li><a href="submissions.php" class="sidebar-link active"><i class="fa-solid fa-envelope-open-text" style="margin-right: 0.5rem;"></i> Submissions</a></li>
             </ul>
@@ -120,11 +122,12 @@ try {
                 <!-- Filters and Actions Toolbar -->
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
                     <!-- Filter Links -->
-                    <div style="display: flex; gap: 0.75rem;">
-                        <a href="submissions.php" class="admin-btn-outline" style="margin: 0; padding: 0.5rem 1rem; border-color: <?php echo empty($filter_type) ? 'var(--primary)' : '#cbd5e1'; ?>; background-color: <?php echo empty($filter_type) ? '#f1f5f9' : 'transparent'; ?>;">All</a>
-                        <a href="submissions.php?type=contact" class="admin-btn-outline" style="margin: 0; padding: 0.5rem 1rem; border-color: <?php echo ($filter_type == 'contact') ? 'var(--primary)' : '#cbd5e1'; ?>; background-color: <?php echo ($filter_type == 'contact') ? '#f1f5f9' : 'transparent'; ?>;">Contacts</a>
-                        <a href="submissions.php?type=prayer" class="admin-btn-outline" style="margin: 0; padding: 0.5rem 1rem; border-color: <?php echo ($filter_type == 'prayer') ? 'var(--primary)' : '#cbd5e1'; ?>; background-color: <?php echo ($filter_type == 'prayer') ? '#f1f5f9' : 'transparent'; ?>;">Prayers</a>
-                        <a href="submissions.php?type=pledge" class="admin-btn-outline" style="margin: 0; padding: 0.5rem 1rem; border-color: <?php echo ($filter_type == 'pledge') ? 'var(--primary)' : '#cbd5e1'; ?>; background-color: <?php echo ($filter_type == 'pledge') ? '#f1f5f9' : 'transparent'; ?>;">Pledges</a>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <a href="submissions.php" class="admin-btn-outline" style="margin: 0; padding: 0.5rem 0.75rem; font-size: 0.85rem; border-color: <?php echo empty($filter_type) ? 'var(--primary)' : '#cbd5e1'; ?>; background-color: <?php echo empty($filter_type) ? '#f1f5f9' : 'transparent'; ?>;">All</a>
+                        <a href="submissions.php?type=member_registration" class="admin-btn-outline" style="margin: 0; padding: 0.5rem 0.75rem; font-size: 0.85rem; border-color: <?php echo ($filter_type == 'member_registration') ? 'var(--primary)' : '#cbd5e1'; ?>; background-color: <?php echo ($filter_type == 'member_registration') ? '#f1f5f9' : 'transparent'; ?>;">Members</a>
+                        <a href="submissions.php?type=pledge" class="admin-btn-outline" style="margin: 0; padding: 0.5rem 0.75rem; font-size: 0.85rem; border-color: <?php echo ($filter_type == 'pledge') ? 'var(--primary)' : '#cbd5e1'; ?>; background-color: <?php echo ($filter_type == 'pledge') ? '#f1f5f9' : 'transparent'; ?>;">Pledges</a>
+                        <a href="submissions.php?type=prayer" class="admin-btn-outline" style="margin: 0; padding: 0.5rem 0.75rem; font-size: 0.85rem; border-color: <?php echo ($filter_type == 'prayer') ? 'var(--primary)' : '#cbd5e1'; ?>; background-color: <?php echo ($filter_type == 'prayer') ? '#f1f5f9' : 'transparent'; ?>;">Prayers</a>
+                        <a href="submissions.php?type=contact" class="admin-btn-outline" style="margin: 0; padding: 0.5rem 0.75rem; font-size: 0.85rem; border-color: <?php echo ($filter_type == 'contact') ? 'var(--primary)' : '#cbd5e1'; ?>; background-color: <?php echo ($filter_type == 'contact') ? '#f1f5f9' : 'transparent'; ?>;">Contacts</a>
                     </div>
                     
                     <!-- Export Button -->
