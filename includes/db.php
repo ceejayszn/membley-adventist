@@ -1,117 +1,53 @@
 <?php
 // includes/db.php
 
-$db_type = 'mysql'; // Default local database type
-$db_host = getenv('DB_HOST') ?: '127.0.0.1';
-$db_port = getenv('DB_PORT') ?: '3306';
-$db_name = getenv('DB_NAME') ?: 'membley_adventist';
-$db_user = getenv('DB_USER') ?: 'root';
-$db_pass = getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : '';
-
-// Render PostgreSQL Auto-Detection
-$database_url = getenv('DATABASE_URL');
-if (!empty($database_url)) {
-    $db_type = 'pgsql';
-    $dbparts = parse_url($database_url);
-    $db_host = $dbparts['host'];
-    $db_port = $dbparts['port'] ?? '5432';
-    $db_user = $dbparts['user'];
-    $db_pass = $dbparts['pass'];
-    $db_name = ltrim($dbparts['path'], '/');
-} elseif (getenv('DB_TYPE') === 'pgsql') {
-    $db_type = 'pgsql';
-    $db_host = getenv('DB_HOST') ?: 'localhost';
-    $db_port = getenv('DB_PORT') ?: '5432';
-    $db_name = getenv('DB_NAME') ?: 'membley_adventist';
-    $db_user = getenv('DB_USER') ?: 'postgres';
-    $db_pass = getenv('DB_PASSWORD') ?: 'postgres';
-}
+$db_file = __DIR__ . '/church.db';
 
 try {
-    if ($db_type === 'pgsql') {
-        // PostgreSQL Connection
-        $dsn = "pgsql:host=$db_host;port=$db_port;dbname=$db_name;options='--client_encoding=UTF8'";
-        $pdo = new PDO($dsn, $db_user, $db_pass, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_TIMEOUT => 5
-        ]);
+    // Connect to SQLite database (will be created automatically if not exists)
+    $dsn = "sqlite:$db_file";
+    $pdo = new PDO($dsn, null, null, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_TIMEOUT => 5
+    ]);
 
-        // PostgreSQL Schema
-        $pdo->exec("CREATE TABLE IF NOT EXISTS users (
-            id SERIAL PRIMARY KEY,
-            username VARCHAR(50) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )");
+    // Create tables if they do not exist
+    
+    // 1. Users Table (Admin Portal)
+    $pdo->exec("CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )");
 
-        $pdo->exec("CREATE TABLE IF NOT EXISTS blogs (
-            id SERIAL PRIMARY KEY,
-            title VARCHAR(255) NOT NULL,
-            slug VARCHAR(255) UNIQUE NOT NULL,
-            content TEXT NOT NULL,
-            excerpt TEXT NOT NULL,
-            image_url VARCHAR(255),
-            category VARCHAR(50) DEFAULT 'General',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )");
+    // 2. Blogs Table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS blogs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        slug TEXT UNIQUE NOT NULL,
+        content TEXT NOT NULL,
+        excerpt TEXT NOT NULL,
+        image_url TEXT,
+        category TEXT DEFAULT 'General',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )");
 
-        $pdo->exec("CREATE TABLE IF NOT EXISTS submissions (
-            id SERIAL PRIMARY KEY,
-            type VARCHAR(50) NOT NULL,
-            name VARCHAR(100) NOT NULL,
-            email VARCHAR(100) NOT NULL,
-            phone VARCHAR(20),
-            subject_message TEXT,
-            amount NUMERIC(12,2) DEFAULT 0.00,
-            status VARCHAR(20) DEFAULT 'unread',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )");
-    } else {
-        // MySQL Connection
-        $dsn = "mysql:host=$db_host;port=$db_port;charset=utf8mb4";
-        $pdo = new PDO($dsn, $db_user, $db_pass, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_TIMEOUT => 5
-        ]);
+    // 3. Submissions Table (Contacts, Prayer Requests, Pledges)
+    $pdo->exec("CREATE TABLE IF NOT EXISTS submissions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        type TEXT NOT NULL, -- 'contact', 'prayer', 'pledge'
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        phone TEXT,
+        subject_message TEXT,
+        amount REAL DEFAULT 0.00,
+        status TEXT DEFAULT 'unread', -- 'unread', 'read', 'resolved'
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )");
 
-        $pdo->exec("CREATE DATABASE IF NOT EXISTS `$db_name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-        $pdo->exec("USE `$db_name`");
-
-        // MySQL Schema
-        $pdo->exec("CREATE TABLE IF NOT EXISTS users (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(50) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB");
-
-        $pdo->exec("CREATE TABLE IF NOT EXISTS blogs (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            title VARCHAR(255) NOT NULL,
-            slug VARCHAR(255) UNIQUE NOT NULL,
-            content TEXT NOT NULL,
-            excerpt TEXT NOT NULL,
-            image_url VARCHAR(255),
-            category VARCHAR(50) DEFAULT 'General',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB");
-
-        $pdo->exec("CREATE TABLE IF NOT EXISTS submissions (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            type VARCHAR(50) NOT NULL,
-            name VARCHAR(100) NOT NULL,
-            email VARCHAR(100) NOT NULL,
-            phone VARCHAR(20),
-            subject_message TEXT,
-            amount DECIMAL(12,2) DEFAULT 0.00,
-            status VARCHAR(20) DEFAULT 'unread',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB");
-    }
-
-    // Insert default admin if users table is empty
+    // Insert default admin if users table is empty (admin / admin123)
     $stmt = $pdo->query("SELECT COUNT(*) FROM users");
     if ($stmt->fetchColumn() == 0) {
         $defaultPassword = password_hash('admin123', PASSWORD_BCRYPT);
@@ -184,7 +120,7 @@ try {
     <body>
         <div class="error-card">
             <h1>Database Connection Required</h1>
-            <p>We are unable to connect to the database. If deploying on Render, make sure a PostgreSQL database service is created and attached to this Web Service.</p>
+            <p>We are unable to connect to the SQLite database. Make sure the web server has write permissions to the <code>includes/</code> folder.</p>
             <p><strong>Error Message:</strong> <code><?php echo htmlspecialchars($e->getMessage()); ?></code></p>
         </div>
     </body>

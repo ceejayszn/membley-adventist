@@ -3,12 +3,3 @@ services:
     name: membley-adventist
     runtime: docker
     plan: free
-    envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: membley-db
-          property: connectionString
-
-databases:
-  - name: membley-db
-    plan: free
