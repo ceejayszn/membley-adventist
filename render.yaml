@@ -1,5 +1,5 @@
 services:
   - type: web
-    name: membley-adventist
+    name: membleyadventist
     runtime: docker
     plan: free
