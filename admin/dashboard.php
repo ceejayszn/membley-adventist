@@ -15,12 +15,24 @@ try {
     // Fetch 5 latest submissions
     $stmt = $pdo->query("SELECT * FROM submissions ORDER BY created_at DESC LIMIT 5");
     $recent_submissions = $stmt->fetchAll();
+
+    // Fetch analytics metrics
+    $total_views = $pdo->query("SELECT SUM(views) FROM analytics")->fetchColumn() ?: 0;
+    $total_clicks = $pdo->query("SELECT SUM(clicks) FROM analytics")->fetchColumn() ?: 0;
+    $total_time = $pdo->query("SELECT SUM(time_spent) FROM analytics")->fetchColumn() ?: 0;
+
+    // Fetch details per page
+    $analytics_pages = $pdo->query("SELECT * FROM analytics ORDER BY views DESC")->fetchAll();
 } catch (PDOException $e) {
     $blog_count = 0;
     $contact_count = 0;
     $prayer_count = 0;
     $pledge_count = 0;
     $recent_submissions = [];
+    $total_views = 0;
+    $total_clicks = 0;
+    $total_time = 0;
+    $analytics_pages = [];
 }
 ?>
 <!DOCTYPE html>
@@ -80,6 +92,32 @@ try {
                     </div>
                 </div>
 
+                <!-- Site Traffic & Analytics Row -->
+                <div class="stats-grid" style="margin-top: 1.5rem;">
+                    <div class="stat-card" style="border-top: 4px solid var(--accent);">
+                        <div class="stat-label">Total Site Views</div>
+                        <div class="stat-val"><?php echo number_format($total_views); ?></div>
+                    </div>
+                    <div class="stat-card" style="border-top: 4px solid var(--primary-light);">
+                        <div class="stat-label">Click Interactions</div>
+                        <div class="stat-val"><?php echo number_format($total_clicks); ?></div>
+                    </div>
+                    <div class="stat-card" style="border-top: 4px solid var(--primary);">
+                        <div class="stat-label">Total Time Spent</div>
+                        <div class="stat-val">
+                            <?php 
+                                if ($total_time >= 3600) {
+                                    echo round($total_time / 3600, 1) . ' hrs';
+                                } elseif ($total_time >= 60) {
+                                    echo round($total_time / 60, 1) . ' mins';
+                                } else {
+                                    echo $total_time . ' secs';
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Recent Submissions Section -->
                 <div class="card-table-wrap">
                     <div class="card-table-header">
@@ -132,6 +170,58 @@ try {
                                 <?php else: ?>
                                     <tr>
                                         <td colspan="6" style="text-align: center; color: #637381; padding: 2rem;">No submissions yet.</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Page Analytics Metrics -->
+                <div class="card-table-wrap" style="margin-top: 2rem;">
+                    <div class="card-table-header">
+                        <span class="table-title">Page-level Visitor Analytics</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Page Route</th>
+                                    <th>Views</th>
+                                    <th>Click Interactions</th>
+                                    <th>Total Time Spent</th>
+                                    <th>Avg Time Spent / View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($analytics_pages)): ?>
+                                    <?php foreach ($analytics_pages as $page): ?>
+                                        <tr>
+                                            <td style="font-family: monospace; font-weight: 700; color: var(--primary-light);">
+                                                <?php echo htmlspecialchars($page['page']); ?>
+                                            </td>
+                                            <td><strong><?php echo number_format($page['views']); ?></strong></td>
+                                            <td><?php echo number_format($page['clicks']); ?></td>
+                                            <td>
+                                                <?php 
+                                                    if ($page['time_spent'] >= 60) {
+                                                        echo round($page['time_spent'] / 60, 1) . ' mins';
+                                                    } else {
+                                                        echo $page['time_spent'] . ' secs';
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php 
+                                                    $avg = $page['views'] > 0 ? round($page['time_spent'] / $page['views']) : 0;
+                                                    echo $avg . ' secs';
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="5" style="text-align: center; color: #637381; padding: 2rem;">No traffic data logged yet. Open public pages to seed views.</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>

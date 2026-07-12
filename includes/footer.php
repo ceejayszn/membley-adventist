@@ -72,5 +72,41 @@
 
     <!-- Main scripts -->
     <script src="assets/js/main.js"></script>
+
+    <!-- Lightweight Analytics Tracker -->
+    <script>
+    (function() {
+        const pagePath = window.location.pathname.split('/').pop() || 'index.php';
+        
+        // 1. Record Page View on Load
+        fetch('track.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ page: pagePath, type: 'view' })
+        }).catch(() => {});
+
+        // 2. Record Click Interactions
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('a, button, .btn')) {
+                fetch('track.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ page: pagePath, type: 'click' })
+                }).catch(() => {});
+            }
+        });
+
+        // 3. Record Time Spent (Send updates every 10 seconds of active viewing)
+        setInterval(function() {
+            if (document.visibilityState === 'visible') {
+                fetch('track.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ page: pagePath, type: 'time', value: 10 })
+                }).catch(() => {});
+            }
+        }, 10000);
+    })();
+    </script>
 </body>
 </html>

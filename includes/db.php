@@ -47,6 +47,14 @@ try {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )");
 
+    // 4. Analytics Table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS analytics (
+        page TEXT PRIMARY KEY,
+        views INTEGER DEFAULT 0,
+        clicks INTEGER DEFAULT 0,
+        time_spent INTEGER DEFAULT 0
+    )");
+
     // Insert default admin if users table is empty (admin / admin123)
     $stmt = $pdo->query("SELECT COUNT(*) FROM users");
     if ($stmt->fetchColumn() == 0) {
