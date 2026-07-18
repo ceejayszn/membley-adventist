@@ -69,6 +69,59 @@ try {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )");
 
+    // 6. Applications Table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS applications (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        description TEXT,
+        file_url TEXT NOT NULL,
+        platform TEXT,
+        version TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    // 7. App Downloads Table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS app_downloads (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        app_id INTEGER NOT NULL,
+        ip_address TEXT NOT NULL,
+        mac_address TEXT DEFAULT 'Unknown',
+        device_info TEXT,
+        downloaded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (app_id) REFERENCES applications(id)
+    )");
+
+    // Insert default applications if applications table is empty
+    $stmt_apps = $pdo->query("SELECT COUNT(*) FROM applications");
+    if ($stmt_apps->fetchColumn() == 0) {
+        $insertApp = $pdo->prepare("INSERT INTO applications (name, description, file_url, platform, version) VALUES (:name, :description, :file_url, :platform, :version)");
+        $seedApps = [
+            [
+                'name' => 'Membley Adventist Mobile',
+                'description' => 'The official church mobile app for sermons, hymns, and online giving.',
+                'file_url' => 'assets/apps/membley-adventist.apk',
+                'platform' => 'Android',
+                'version' => '1.0.0'
+            ],
+            [
+                'name' => 'Sabbath School Quarterly',
+                'description' => 'Digital study guide for adults and youth.',
+                'file_url' => 'assets/apps/ss-quarterly.pdf',
+                'platform' => 'All',
+                'version' => '2026.3'
+            ]
+        ];
+        foreach ($seedApps as $app) {
+            $insertApp->execute([
+                ':name' => $app['name'],
+                ':description' => $app['description'],
+                ':file_url' => $app['file_url'],
+                ':platform' => $app['platform'],
+                ':version' => $app['version']
+            ]);
+        }
+    }
+
     // Insert default admin if users table is empty (admin / admin123)
     $stmt = $pdo->query("SELECT COUNT(*) FROM users");
     if ($stmt->fetchColumn() == 0) {
