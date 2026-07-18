@@ -825,102 +825,96 @@ textarea.form-control {
     }
 }
 
- / *   R e s p o n s i v e   L a y o u t   U t i l i t i e s   * / 
- . r e s p o n s i v e - g r i d - a b o u t   { 
-         d i s p l a y :   g r i d ; 
-         g r i d - t e m p l a t e - c o l u m n s :   1 . 2 f r   0 . 8 f r ; 
-         g a p :   4 r e m ; 
-         a l i g n - i t e m s :   s t a r t ; 
- } 
- . r e s p o n s i v e - g r i d - 2   { 
-         d i s p l a y :   g r i d ; 
-         g r i d - t e m p l a t e - c o l u m n s :   1 f r   1 f r ; 
-         g a p :   2 r e m ; 
- } 
- . r e s p o n s i v e - g r i d - m i n i s t r i e s   { 
-         d i s p l a y :   g r i d ; 
-         g r i d - t e m p l a t e - c o l u m n s :   1 f r   1 . 2 f r ; 
-         g a p :   3 r e m ; 
-         a l i g n - i t e m s :   c e n t e r ; 
- } 
- . r e s p o n s i v e - g r i d - m i n i s t r i e s - a l t   { 
-         d i s p l a y :   g r i d ; 
-         g r i d - t e m p l a t e - c o l u m n s :   1 . 2 f r   1 f r ; 
-         g a p :   3 r e m ; 
-         a l i g n - i t e m s :   c e n t e r ; 
- } 
- . r e s p o n s i v e - f l e x - e v e n t s   { 
-         d i s p l a y :   f l e x ; 
-         g a p :   3 r e m ; 
-         a l i g n - i t e m s :   s t a r t ; 
- } 
- . r e s p o n s i v e - f l e x - e v e n t s - s i d e b a r   { 
-         f l e x :   0   0   2 8 0 p x ; 
-         d i s p l a y :   f l e x ; 
-         f l e x - d i r e c t i o n :   c o l u m n ; 
-         g a p :   1 . 5 r e m ; 
- } 
- 
- @ m e d i a ( m a x - w i d t h :   9 9 2 p x )   { 
-         . r e s p o n s i v e - g r i d - a b o u t ,   
-         . r e s p o n s i v e - g r i d - m i n i s t r i e s ,   
-         . r e s p o n s i v e - g r i d - m i n i s t r i e s - a l t   { 
-                 g r i d - t e m p l a t e - c o l u m n s :   1 f r ; 
-                 g a p :   2 . 5 r e m ; 
-         } 
-         . r e s p o n s i v e - f l e x - e v e n t s   { 
-                 f l e x - d i r e c t i o n :   c o l u m n ; 
-         } 
-         . r e s p o n s i v e - f l e x - e v e n t s - s i d e b a r   { 
-                 f l e x :   n o n e ; 
-                 w i d t h :   1 0 0 % ; 
-         } 
- } 
- @ m e d i a ( m a x - w i d t h :   7 6 8 p x )   { 
-         . r e s p o n s i v e - g r i d - 2   { 
-                 g r i d - t e m p l a t e - c o l u m n s :   1 f r ; 
-         } 
- } 
-  
- 
- . e v e n t - l i s t - c a r d   { 
-         b a c k g r o u n d - c o l o r :   v a r ( - - b g - w h i t e ) ; 
-         b o r d e r - r a d i u s :   1 0 p x ; 
-         b o r d e r :   1 p x   s o l i d   v a r ( - - b o r d e r - c o l o r ) ; 
-         p a d d i n g :   2 r e m ; 
-         d i s p l a y :   f l e x ; 
-         g a p :   2 r e m ; 
-         a l i g n - i t e m s :   c e n t e r ; 
-         b o x - s h a d o w :   v a r ( - - s h a d o w - s m ) ; 
- } 
- 
- @ m e d i a ( m a x - w i d t h :   7 6 8 p x )   { 
-         . e v e n t - l i s t - c a r d   { 
-                 f l e x - d i r e c t i o n :   c o l u m n ; 
-                 a l i g n - i t e m s :   f l e x - s t a r t ; 
-                 t e x t - a l i g n :   l e f t ; 
-                 g a p :   1 . 5 r e m ; 
-                 p a d d i n g :   1 . 5 r e m ; 
-         } 
- } 
-  
- 
- . f o r m - g r i d - 2   { 
-         d i s p l a y :   g r i d ; 
-         g r i d - t e m p l a t e - c o l u m n s :   1 f r   1 f r ; 
-         g a p :   1 r e m ; 
- } 
- . r e s p o n s i v e - h e r o - g r i d   { 
-         d i s p l a y :   g r i d ; 
-         g r i d - t e m p l a t e - c o l u m n s :   1 f r   1 f r ; 
-         g a p :   3 r e m ; 
-         a l i g n - i t e m s :   c e n t e r ; 
- } 
- @ m e d i a ( m a x - w i d t h :   7 6 8 p x )   { 
-         . f o r m - g r i d - 2 , 
-         . r e s p o n s i v e - h e r o - g r i d   { 
-                 g r i d - t e m p l a t e - c o l u m n s :   1 f r ; 
-         } 
- } 
-  
- 
+/* =========================================
+   RESPONSIVE LAYOUT UTILITY CLASSES
+   ========================================= */
+.responsive-grid-about {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: start;
+}
+.responsive-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+.responsive-grid-ministries {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: center;
+}
+.responsive-grid-ministries-alt {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+.responsive-flex-events {
+    display: flex;
+    gap: 3rem;
+    align-items: start;
+}
+.responsive-flex-events-sidebar {
+    flex: 0 0 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.responsive-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.event-list-card {
+    background-color: var(--bg-white);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Tablet (max 992px) */
+@media(max-width: 992px) {
+    .responsive-grid-about,
+    .responsive-grid-ministries,
+    .responsive-grid-ministries-alt {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    .responsive-flex-events {
+        flex-direction: column;
+    }
+    .responsive-flex-events-sidebar {
+        flex: none;
+        width: 100%;
+    }
+    .responsive-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Mobile (max 768px) */
+@media(max-width: 768px) {
+    .responsive-grid-2,
+    .form-grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .event-list-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding: 1.5rem;
+    }
+}

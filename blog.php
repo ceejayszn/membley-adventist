@@ -2,8 +2,8 @@
 // blog.php
 require_once 'includes/db.php';
 require_once 'includes/header.php';
+?>
 
-<!-- Coming Soon Section -->
 <section class="section-padding container">
     <div style="text-align: center; max-width: 600px; margin: 0 auto; padding: 4rem 2rem; background-color: var(--bg-white); border-radius: 12px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
         <i class="fa-solid fa-pen-nib" style="font-size: 3rem; color: var(--accent); margin-bottom: 1.5rem;"></i>
