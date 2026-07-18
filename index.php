@@ -3,10 +3,10 @@
 require_once 'includes/db.php';
 require_once 'includes/header.php';
 
-// Fetch 3 latest blog posts
+// Fetch 1 latest blog post
 $latest_blogs = [];
 try {
-    $stmt = $pdo->query("SELECT * FROM blogs ORDER BY created_at DESC LIMIT 3");
+    $stmt = $pdo->query("SELECT * FROM blogs ORDER BY created_at DESC LIMIT 1");
     $latest_blogs = $stmt->fetchAll();
 } catch (PDOException $e) {
     // Gracefully handle query issue if any
@@ -70,11 +70,6 @@ try {
                     <div class="service-time-hours">Saturdays | 4:00 PM - 5:30 PM</div>
                     <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 0.5rem;">Vibrant sessions including youth discussions, singing, and quizzes.</p>
                 </div>
-                <div class="service-item">
-                    <div class="service-time-title">Mid-Week Prayer</div>
-                    <div class="service-time-hours">Wednesdays | 6:30 PM - 7:30 PM</div>
-                    <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 0.5rem;">Midweek devotional session for spiritual rejuvenation and prayer requests.</p>
-                </div>
             </div>
         </div>
     </div>
@@ -121,11 +116,11 @@ try {
         <div class="grid-3">
             <!-- Kids -->
             <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&q=80&w=400');">
+                <div class="card-img" style="background-image: url('assets/images/adventurer_logo.png'); background-size: contain; background-repeat: no-repeat; background-color: var(--bg-light); background-position: center;">
                     <span class="card-tag">Children</span>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Sabbath School Kids</h3>
+                    <h3 class="card-title">Adventurous Club</h3>
                     <p class="card-desc">Catering to beginners, primary, and junior groups with exciting activities, songs, and Bible lessons to build a firm spiritual foundation.</p>
                     <a href="ministries.php?tab=children" class="btn btn-outline btn-sm">Learn More</a>
                 </div>
@@ -133,11 +128,11 @@ try {
             
             <!-- Pathfinders -->
             <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=400');">
+                <div class="card-img" style="background-image: url('assets/images/pathfinder_logo.png'); background-size: contain; background-repeat: no-repeat; background-color: var(--bg-light);">
                     <span class="card-tag">Club</span>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Pathfinder & Adventurer Clubs</h3>
+                    <h3 class="card-title">Pathfinders</h3>
                     <p class="card-desc">Instilling Christian values, life skills, camping, and outdoor exploration in children aged 6 to 15 years through the worldwide club movement.</p>
                     <a href="ministries.php?tab=clubs" class="btn btn-outline btn-sm">Learn More</a>
                 </div>
@@ -165,24 +160,48 @@ try {
         <h2 class="section-title">Latest Updates & Sermons</h2>
     </div>
     
-    <div class="grid-3">
-        <?php if (!empty($latest_blogs)): ?>
-            <?php foreach ($latest_blogs as $post): ?>
-                <div class="card">
-                    <div class="card-img" style="background-image: url('<?php echo !empty($post['image_url']) ? htmlspecialchars($post['image_url']) : 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&q=80&w=400'; ?>');">
-                        <span class="card-tag"><?php echo htmlspecialchars($post['category']); ?></span>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+        
+        <!-- Latest Blog/Update -->
+        <div>
+            <h3 style="margin-bottom: 1rem; color: var(--primary);">Recent Post</h3>
+            <?php if (!empty($latest_blogs)): ?>
+                <?php foreach ($latest_blogs as $post): ?>
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('<?php echo !empty($post['image_url']) ? htmlspecialchars($post['image_url']) : 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&q=80&w=400'; ?>');">
+                            <span class="card-tag"><?php echo htmlspecialchars($post['category']); ?></span>
+                        </div>
+                        <div class="card-body">
+                            <span class="card-date"><i class="fa-regular fa-calendar"></i> <?php echo date('M d, Y', strtotime($post['created_at'])); ?></span>
+                            <h3 class="card-title"><?php echo htmlspecialchars($post['title']); ?></h3>
+                            <p class="card-desc"><?php echo htmlspecialchars($post['excerpt']); ?></p>
+                            <a href="blog-single.php?slug=<?php echo htmlspecialchars($post['slug']); ?>" class="btn btn-outline btn-sm">Read Post</a>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <span class="card-date"><i class="fa-regular fa-calendar"></i> <?php echo date('M d, Y', strtotime($post['created_at'])); ?></span>
-                        <h3 class="card-title"><?php echo htmlspecialchars($post['title']); ?></h3>
-                        <p class="card-desc"><?php echo htmlspecialchars($post['excerpt']); ?></p>
-                        <a href="blog-single.php?slug=<?php echo htmlspecialchars($post['slug']); ?>" class="btn btn-outline btn-sm">Read Post</a>
-                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p style="text-align: center; color: var(--text-muted);">No blog posts found. Check back soon!</p>
+            <?php endif; ?>
+        </div>
+
+        <!-- Camp Meeting Update -->
+        <div>
+            <h3 style="margin-bottom: 1rem; color: var(--primary);">Camp Meeting Update</h3>
+            <div class="card" style="border: 2px solid var(--accent);">
+                <!-- User will send photo to place here -->
+                <div class="card-img" style="background-image: url(''); background-color: #f1f5f9; display: flex; align-items: center; justify-content: center;">
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">[Camp Meeting Photo Placeholder]</span>
+                    <span class="card-tag" style="background-color: var(--accent); color: var(--primary-dark);">Special Update</span>
                 </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p style="text-align: center; grid-column: span 3; color: var(--text-muted);">No blog posts found. Check back soon!</p>
-        <?php endif; ?>
+                <div class="card-body">
+                    <span class="card-date"><i class="fa-solid fa-bullhorn"></i> Important Announcement</span>
+                    <h3 class="card-title">Annual Camp Meeting 2026</h3>
+                    <p class="card-desc">We are excited to share the latest updates on our upcoming annual camp meeting. Stay tuned for further details regarding speakers, schedule, and preparations.</p>
+                    <a href="events.php" class="btn btn-accent btn-sm">View in Events</a>
+                </div>
+            </div>
+        </div>
+
     </div>
     
     <div style="text-align: center; margin-top: 3rem;">

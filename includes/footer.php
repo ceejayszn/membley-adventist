@@ -26,7 +26,6 @@
                         <li style="margin-bottom: 0.5rem;"><strong>Sabbath School:</strong> Saturdays at 9:00 AM</li>
                         <li style="margin-bottom: 0.5rem;"><strong>Divine Worship:</strong> Saturdays at 11:00 AM</li>
                         <li style="margin-bottom: 0.5rem;"><strong>Adventist Youth (AY):</strong> Saturdays at 4:00 PM</li>
-                        <li style="margin-bottom: 0.5rem;"><strong>Mid-Week Prayer:</strong> Wednesdays at 6:30 PM</li>
                     </ul>
                 </div>
 

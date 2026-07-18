@@ -22,7 +22,6 @@ require_once 'includes/header.php';
                 <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Regular Worship</h3>
                 <ul style="list-style: none; font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.75rem;">
                     <li><strong>Sabbaths:</strong> 9:00 AM – 5:00 PM</li>
-                    <li><strong>Wednesdays:</strong> 6:30 PM – 7:30 PM (Midweek)</li>
                     <li><strong>Fridays:</strong> 6:00 PM – 7:00 PM (Vespers)</li>
                 </ul>
             </div>
@@ -48,6 +47,24 @@ require_once 'includes/header.php';
                     <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.4rem;">Annual Church Camp Meeting 2026</h3>
                     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.5rem;"><i class="fa-solid fa-clock"></i> 8:00 AM – 5:00 PM Daily (Aug 16th – Aug 23rd)</p>
                     <p style="font-size: 0.95rem; color: var(--text-muted);"><i class="fa-solid fa-location-dot"></i> Membley SDA Church Sanctuary</p>
+                </div>
+            </div>
+
+            <!-- Event 1.5: Youth Hike -->
+            <div style="background-color: var(--bg-white); border-radius: 10px; border: 1px solid var(--border-color); padding: 2rem; display: flex; gap: 2rem; align-items: center; box-shadow: var(--shadow-sm);">
+                <div style="background-color: var(--primary-dark); color: white; padding: 1rem; border-radius: 8px; text-align: center; min-width: 100px;">
+                    <span style="font-size: 1.8rem; font-weight: 800; display: block; line-height: 1; color: var(--accent);">19</span>
+                    <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">JUL</span>
+                </div>
+                <div style="flex: 1;">
+                    <span style="background-color: rgba(8,43,67,0.1); color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem;">Youth / AY</span>
+                    <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.4rem;">Youth Hike to KIMAKIA Forest</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.5rem;"><i class="fa-solid fa-clock"></i> Tomorrow, 7:00 AM Departure</p>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem;"><i class="fa-solid fa-location-dot"></i> KIMAKIA Forest, Murang'a</p>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">Join the youth for a refreshing hike and team-building at Kimakia Forest. Pack a lunch, carry some water, and wear comfortable hiking shoes!</p>
+                </div>
+                <!-- Photo placeholder for the hike -->
+                <div style="width: 150px; height: 150px; border-radius: 8px; background-color: #f1f5f9; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; text-align: center; background-image: url('assets/images/hike_photo.jpg'); background-size: cover; background-position: center;">
                 </div>
             </div>
 

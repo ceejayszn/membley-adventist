@@ -59,7 +59,7 @@ require_once 'includes/header.php';
         </div>
     <?php endif; ?>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; flex-wrap: wrap;">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: start;">
         <!-- Left Column: Contact Form -->
         <div style="background-color: var(--bg-white); padding: 2.5rem; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
             <h2 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.8rem;"><i class="fa-regular fa-envelope" style="color: var(--accent);"></i> Send Us a Message</h2>

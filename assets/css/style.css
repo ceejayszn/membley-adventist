@@ -810,6 +810,11 @@ textarea.form-control {
         font-size: 0.9rem;
     }
     
+    /* Mobile Footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
     /* Contact Forms */
     .giving-card, .admin-form {
         padding: 1.5rem;

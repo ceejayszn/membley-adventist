@@ -70,14 +70,7 @@ require_once 'includes/header.php';
                 <!-- Mpesa -->
                 <div class="payment-method">
                     <span class="badge-paybill"><i class="fa-solid fa-mobile-screen-button"></i> M-PESA PAYBILL</span>
-                    <h3 style="color: var(--primary); margin-top: 0.5rem;">Paybill Number: <span style="color: var(--primary-light);">400222</span></h3>
-                    <p style="font-size: 0.95rem; color: var(--text-dark); font-weight: 500; margin-bottom: 0.5rem;">Account format examples:</p>
-                    <ul style="padding-left: 1.25rem; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.25rem;">
-                        <li>For Tithe: <code>2649#Tithe</code></li>
-                        <li>For Combined Offering: <code>2649#Offering</code></li>
-                        <li>For Church Development: <code>2649#Building</code></li>
-                        <li>For Club / Pathfinder: <code>2649#Clubs</code></li>
-                    </ul>
+                    <p style="font-size: 0.95rem; color: var(--text-dark); margin-top: 1rem; margin-bottom: 0.5rem;">For M-PESA Paybill details, please contact the church treasurer or check the bulletin.</p>
                 </div>
 
                 <!-- Bank -->
@@ -86,7 +79,7 @@ require_once 'includes/header.php';
                     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.5rem;">Direct deposit / Bank transfers:</p>
                     <p style="font-size: 1rem; font-weight: 700; color: var(--text-dark);">
                         Account Name: Membley Seventh-day Adventist Church <br>
-                        Account Number: 01129483726100 <br>
+                        Account Number: [To be provided] <br>
                         Branch: Ruiru Branch
                     </p>
                 </div>

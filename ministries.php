@@ -19,8 +19,8 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'youth';
 <div class="container tab-container" style="padding-top: 3rem;">
     <div class="tab-buttons">
         <button class="tab-btn <?php echo ($active_tab == 'youth') ? 'active' : ''; ?>" data-tab="youth"><i class="fa-solid fa-users"></i> Adventist Youth (AY)</button>
-        <button class="tab-btn <?php echo ($active_tab == 'clubs') ? 'active' : ''; ?>" data-tab="clubs"><i class="fa-solid fa-compass"></i> Pathfinders & Adventurers</button>
-        <button class="tab-btn <?php echo ($active_tab == 'children') ? 'active' : ''; ?>" data-tab="children"><i class="fa-solid fa-child"></i> Kids Sabbath School</button>
+        <button class="tab-btn <?php echo ($active_tab == 'clubs') ? 'active' : ''; ?>" data-tab="clubs"><i class="fa-solid fa-compass"></i> Pathfinders</button>
+        <button class="tab-btn <?php echo ($active_tab == 'children') ? 'active' : ''; ?>" data-tab="children"><i class="fa-solid fa-child"></i> Adventurous Club</button>
         <button class="tab-btn <?php echo ($active_tab == 'general') ? 'active' : ''; ?>" data-tab="general"><i class="fa-solid fa-church"></i> Church Ministries</button>
         <button class="tab-btn <?php echo ($active_tab == 'development') ? 'active' : ''; ?>" data-tab="development"><i class="fa-solid fa-trowel-bricks"></i> Church Development</button>
     </div>
@@ -50,10 +50,10 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'youth';
     <div class="tab-content <?php echo ($active_tab == 'clubs') ? 'active' : ''; ?>" id="clubs">
         <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center;">
             <div>
-                <span class="section-subtitle">Ages 6 - 15</span>
-                <h2 style="color: var(--primary); margin-bottom: 1rem; font-size: 2rem;">Adventurer & Pathfinder Clubs</h2>
+                <span class="section-subtitle">Ages 10 - 15</span>
+                <h2 style="color: var(--primary); margin-bottom: 1rem; font-size: 2rem;">Pathfinder Club</h2>
                 <p style="color: var(--text-muted); margin-bottom: 1.25rem;">
-                    The **Adventurer Club** (ages 6-9) and **Pathfinder Club** (ages 10-15) are worldwide organizations sponsored by the Seventh-day Adventist Church. They operate similarly to scouting, but with a distinct spiritual focus.
+                    The **Pathfinder Club** (ages 10-15) is a worldwide organization sponsored by the Seventh-day Adventist Church. It operates similarly to scouting, but with a distinct spiritual focus.
                 </p>
                 <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                     Through weekly meetings, outdoor camps, drills, honors classes, and community projects, children discover their God-given potential and develop life-saving skills. Honours covered include camping, first aid, astronomy, nature studies, and bible markings.
@@ -63,7 +63,6 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'youth';
                     <strong>Activities:</strong> Camporees, nature exploration, first-aid drills, physical fitness, and honors curriculum.
                 </div>
             <div style="display: flex; gap: 2rem; justify-content: center; align-items: center; background-color: var(--bg-white); border-radius: 12px; padding: 2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: 380px;">
-                <img src="assets/images/adventurer_logo.png" alt="Adventurer Club Logo" style="max-height: 150px; width: auto; object-fit: contain;">
                 <img src="assets/images/pathfinder_logo.png" alt="Pathfinder Club Logo" style="max-height: 150px; width: auto; object-fit: contain;">
             </div>
         </div>
@@ -72,15 +71,17 @@ $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'youth';
     <!-- Children Content -->
     <div class="tab-content <?php echo ($active_tab == 'children') ? 'active' : ''; ?>" id="children">
         <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: center;">
-            <div style="height: 380px; border-radius: 12px; background-image: url('https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&q=80&w=600'); background-size: cover; background-position: center;"></div>
+            <div style="height: 380px; border-radius: 12px; background-color: var(--bg-white); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; background-image: url('assets/images/adventurer_logo.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                <span style="color: transparent; font-size: 0.9rem;">[Adventurous Club Logo Placeholder]</span>
+            </div>
             <div>
-                <span class="section-subtitle">Ages 0 - 14</span>
-                <h2 style="color: var(--primary); margin-bottom: 1rem; font-size: 2rem;">Children's Sabbath School</h2>
+                <span class="section-subtitle">Ages 0 - 9</span>
+                <h2 style="color: var(--primary); margin-bottom: 1rem; font-size: 2rem;">Adventurous Club</h2>
                 <p style="color: var(--text-muted); margin-bottom: 1.25rem;">
-                    Our Children's Ministry department is committed to making church a fun, welcoming, and life-changing place for kids. We use age-appropriate lessons from the GraceLink curriculum to introduce children to the character of God.
+                    The Adventurous Club is committed to making church a fun, welcoming, and life-changing place for kids. We use age-appropriate activities to introduce children to the character of God.
                 </p>
                 <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-                    Classes are split into: Beginners (ages 0-2), Kindergarten (ages 3-5), Primary (ages 6-9), and Juniors/Teens (ages 10-14). Every Sabbath morning at 9:00 AM, children engage in singing, quizzes, memory verse recitation, crafts, and interactive storytelling.
+                    Every Sabbath morning at 9:00 AM, children engage in singing, quizzes, memory verse recitation, crafts, and interactive storytelling.
                 </p>
             </div>
         </div>

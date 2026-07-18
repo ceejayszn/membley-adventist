@@ -16,6 +16,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
 </head>
 <body>
 
+    <?php if ($current_page == 'index.php'): ?>
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="container">
@@ -30,6 +31,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
             </div>
         </div>
     </div>
+    <?php endif; ?>
 
     <!-- Main Navigation Header -->
     <header class="main-header">
