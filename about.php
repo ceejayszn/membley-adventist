@@ -14,7 +14,7 @@ require_once 'includes/header.php';
 
 <!-- History & Mission -->
 <section class="section-padding container">
-    <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: start;">
+    <div class="responsive-grid-about">
         <div>
             <h2 style="font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem;">Our History & Journey</h2>
             <p style="margin-bottom: 1.25rem; color: var(--text-muted);">
@@ -24,7 +24,7 @@ require_once 'includes/header.php';
                 Through active community outreach, robust youth engagement, and a focus on Bible-based teachings, our church has become a lighthouse in the community. We are currently undergoing key development projects to expand our sanctuary and build facilities that serve the neighborhood's social, educational, and spiritual needs.
             </p>
             
-            <div style="margin-top: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div class="responsive-grid-2" style="margin-top: 3rem;">
                 <div style="background-color: var(--bg-white); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--accent); box-shadow: var(--shadow-sm);">
                     <h3 style="color: var(--primary); margin-bottom: 0.75rem;"><i class="fa-solid fa-bullseye" style="color: var(--accent);"></i> Our Mission</h3>
                     <p style="font-size: 0.95rem; color: var(--text-muted);">To proclaim the everlasting gospel of Jesus Christ in the context of the three angels' messages of Revelation 14:6-12 to all people in Membley and beyond, leading them to accept Jesus as personal Savior.</p>

@@ -14,10 +14,10 @@ require_once 'includes/header.php';
 
 <!-- Filterable Events -->
 <section class="section-padding container">
-    <div style="display: flex; gap: 3rem; align-items: start;">
+    <div class="responsive-flex-events">
         
         <!-- Left: Filters & Service Info -->
-        <div style="flex: 0 0 280px; display: flex; flex-direction: column; gap: 1.5rem;">
+        <div class="responsive-flex-events-sidebar">
             <div style="background-color: var(--bg-white); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
                 <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Regular Worship</h3>
                 <ul style="list-style: none; font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.75rem;">
