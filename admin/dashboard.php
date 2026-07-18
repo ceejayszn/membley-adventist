@@ -12,10 +12,6 @@ try {
     $prayer_count = $pdo->query("SELECT COUNT(*) FROM submissions WHERE type = 'prayer' AND status = 'unread'")->fetchColumn();
     $pledge_count = $pdo->query("SELECT COUNT(*) FROM submissions WHERE type = 'pledge' AND status = 'unread'")->fetchColumn();
     
-    // Fetch apps count
-    $app_count = $pdo->query("SELECT COUNT(*) FROM applications")->fetchColumn();
-    $app_download_count = $pdo->query("SELECT COUNT(*) FROM app_downloads")->fetchColumn();
-
     // Fetch 5 latest submissions
     $stmt = $pdo->query("SELECT * FROM submissions ORDER BY created_at DESC LIMIT 5");
     $recent_submissions = $stmt->fetchAll();
@@ -33,8 +29,6 @@ try {
     $prayer_count = 0;
     $pledge_count = 0;
     $recent_submissions = [];
-    $app_count = 0;
-    $app_download_count = 0;
     $total_views = 0;
     $total_clicks = 0;
     $total_time = 0;
@@ -63,7 +57,6 @@ try {
                 <li><a href="forms.php" class="sidebar-link"><i class="fa-solid fa-wpforms" style="margin-right: 0.5rem;"></i> Manage Forms</a></li>
                 <li><a href="analytics.php" class="sidebar-link"><i class="fa-solid fa-chart-line" style="margin-right: 0.5rem;"></i> Visitor Analytics</a></li>
                 <li><a href="blogs.php" class="sidebar-link"><i class="fa-solid fa-newspaper" style="margin-right: 0.5rem;"></i> Manage Blogs</a></li>
-                <li><a href="apps.php" class="sidebar-link"><i class="fa-solid fa-mobile-screen" style="margin-right: 0.5rem;"></i> Applications</a></li>
                 <li><a href="submissions.php" class="sidebar-link"><i class="fa-solid fa-envelope-open-text" style="margin-right: 0.5rem;"></i> Submissions</a></li>
             </ul>
             <div class="sidebar-footer">
@@ -98,16 +91,6 @@ try {
                     <div class="stat-card">
                         <div class="stat-label">Pledges Received</div>
                         <div class="stat-val" style="color: #1e40af;"><?php echo $pledge_count; ?></div>
-                    </div>
-                <!-- Apps & Downloads Row -->
-                <div class="stats-grid" style="margin-top: 1.5rem;">
-                    <div class="stat-card" style="border-top: 4px solid var(--accent);">
-                        <div class="stat-label">Total Applications</div>
-                        <div class="stat-val"><?php echo number_format($app_count); ?></div>
-                    </div>
-                    <div class="stat-card" style="border-top: 4px solid var(--primary-light);">
-                        <div class="stat-label">App Downloads</div>
-                        <div class="stat-val"><?php echo number_format($app_download_count); ?></div>
                     </div>
                 </div>
 

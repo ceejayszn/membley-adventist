@@ -53,8 +53,6 @@ try {
                 <li><a href="forms.php" class="sidebar-link"><i class="fa-solid fa-wpforms" style="margin-right: 0.5rem;"></i> Manage Forms</a></li>
                 <li><a href="analytics.php" class="sidebar-link active"><i class="fa-solid fa-chart-line" style="margin-right: 0.5rem;"></i> Visitor Analytics</a></li>
                 <li><a href="blogs.php" class="sidebar-link"><i class="fa-solid fa-newspaper" style="margin-right: 0.5rem;"></i> Manage Blogs</a></li>
-                <li><a href="apps.php" class="sidebar-link"><i class="fa-solid fa-mobile-screen" style="margin-right: 0.5rem;"></i> Applications</a></li>
-                <li><a href="app_downloads.php" class="sidebar-link"><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i> App Downloads</a></li>
                 <li><a href="submissions.php" class="sidebar-link"><i class="fa-solid fa-envelope-open-text" style="margin-right: 0.5rem;"></i> Submissions</a></li>
             </ul>
             <div class="sidebar-footer">
