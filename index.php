@@ -77,7 +77,7 @@ try {
 
 <!-- Welcome Section -->
 <section class="section-padding container">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+    <div class="responsive-hero-grid">
         <div>
             <span class="section-subtitle">Welcome message</span>
             <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem; color: var(--primary);">A Warm Welcome From Our Pastor</h2>

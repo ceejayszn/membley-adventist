@@ -104,7 +104,7 @@ require_once 'includes/header.php';
                     <label class="form-label" for="phone">Phone Number</label>
                     <input type="tel" id="phone" name="phone" class="form-control" placeholder="e.g. +254 700 123456">
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-grid-2">
                     <div class="form-group">
                         <label class="form-label" for="amount">Pledge Amount (KES) *</label>
                         <input type="number" id="amount" name="amount" class="form-control" min="1" step="any" placeholder="1000" required>

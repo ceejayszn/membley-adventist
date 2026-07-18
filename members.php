@@ -81,7 +81,7 @@ require_once 'includes/header.php';
             
             <h3 style="color: var(--primary); font-size: 1.2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-user"></i> Personal Identification</h3>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-grid-2">
                 <div class="form-group">
                     <label class="form-label" for="name">Full Name *</label>
                     <input type="text" id="name" name="name" class="form-control" placeholder="First Middle Last Name" required>
@@ -92,7 +92,7 @@ require_once 'includes/header.php';
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-grid-2">
                 <div class="form-group">
                     <label class="form-label" for="gender">Gender *</label>
                     <select id="gender" name="gender" class="form-control" style="background-color: white;">
@@ -106,7 +106,7 @@ require_once 'includes/header.php';
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-grid-2">
                 <div class="form-group">
                     <label class="form-label" for="email">Email Address *</label>
                     <input type="email" id="email" name="email" class="form-control" placeholder="e.g. john@example.com" required>
@@ -119,7 +119,7 @@ require_once 'includes/header.php';
 
             <h3 style="color: var(--primary); font-size: 1.2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 2rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-church"></i> Church Affiliation Details</h3>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-grid-2">
                 <div class="form-group">
                     <label class="form-label" for="ss_class">Sabbath School Class Name</label>
                     <input type="text" id="ss_class" name="ss_class" class="form-control" placeholder="e.g. Bereans, Youth, etc.">
@@ -130,7 +130,7 @@ require_once 'includes/header.php';
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-grid-2">
                 <div class="form-group">
                     <label class="form-label" for="baptised">Baptised? *</label>
                     <select id="baptised" name="baptised" class="form-control" style="background-color: white;">

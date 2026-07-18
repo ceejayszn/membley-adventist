@@ -45,7 +45,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
                 <li><a href="index.php" class="nav-link <?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Home</a></li>
                 <li><a href="about.php" class="nav-link <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>">About</a></li>
                 <li><a href="ministries.php" class="nav-link <?php echo ($current_page == 'ministries.php') ? 'active' : ''; ?>">Ministries</a></li>
-                <li><a href="events.php" class="nav-link <?php echo ($current_page == 'events.php') ? 'active' : ''; ?>">Events</a></li>
+                <li><a href="events.php" class="nav-link <?php echo ($current_page == 'events.php') ? 'active' : ''; ?>">Events/Announcements</a></li>
                 <li><a href="blog.php" class="nav-link <?php echo ($current_page == 'blog.php' || $current_page == 'blog-single.php') ? 'active' : ''; ?>">Blog / Sermons</a></li>
                 <li><a href="giving.php" class="nav-link <?php echo ($current_page == 'giving.php') ? 'active' : ''; ?>">Giving</a></li>
                 <li><a href="members.php" class="nav-link <?php echo ($current_page == 'members.php') ? 'active' : ''; ?>">Members</a></li>

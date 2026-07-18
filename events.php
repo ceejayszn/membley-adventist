@@ -7,7 +7,7 @@ require_once 'includes/header.php';
 <!-- Banner Section -->
 <section style="background-color: var(--primary-dark); color: white; padding: 4rem 0; text-align: center; background-image: linear-gradient(rgba(4,25,40,0.8), rgba(4,25,40,0.8)), url('https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&q=80&w=1200'); background-size: cover; background-position: center;">
     <div class="container">
-        <h1 style="color: white; font-size: 2.75rem; margin-bottom: 0.5rem;">Church Events Calendar</h1>
+        <h1 style="color: white; font-size: 2.75rem; margin-bottom: 0.5rem;">Events & Announcements</h1>
         <p style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Join us in our upcoming activities & convocations</p>
     </div>
 </section>
@@ -37,7 +37,7 @@ require_once 'includes/header.php';
         <div style="flex: 1; display: flex; flex-direction: column; gap: 1.5rem;">
             
             <!-- Event 1: Camp Meeting -->
-            <div style="background-color: var(--bg-white); border-radius: 10px; border: 1px solid var(--border-color); padding: 2rem; display: flex; gap: 2rem; align-items: center; box-shadow: var(--shadow-sm);">
+            <div class="event-list-card">
                 <div style="background-color: var(--primary-dark); color: white; padding: 1rem; border-radius: 8px; text-align: center; min-width: 100px;">
                     <span style="font-size: 1.8rem; font-weight: 800; display: block; line-height: 1; color: var(--accent);">16</span>
                     <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">AUG</span>
@@ -51,7 +51,7 @@ require_once 'includes/header.php';
             </div>
 
             <!-- Event 1.5: Youth Hike -->
-            <div style="background-color: var(--bg-white); border-radius: 10px; border: 1px solid var(--border-color); padding: 2rem; display: flex; gap: 2rem; align-items: center; box-shadow: var(--shadow-sm);">
+            <div class="event-list-card">
                 <div style="background-color: var(--primary-dark); color: white; padding: 1rem; border-radius: 8px; text-align: center; min-width: 100px;">
                     <span style="font-size: 1.8rem; font-weight: 800; display: block; line-height: 1; color: var(--accent);">19</span>
                     <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">JUL</span>
@@ -69,7 +69,7 @@ require_once 'includes/header.php';
             </div>
 
             <!-- Event 2: Youth Week of Prayer -->
-            <div style="background-color: var(--bg-white); border-radius: 10px; border: 1px solid var(--border-color); padding: 2rem; display: flex; gap: 2rem; align-items: center; box-shadow: var(--shadow-sm);">
+            <div class="event-list-card">
                 <div style="background-color: var(--primary-dark); color: white; padding: 1rem; border-radius: 8px; text-align: center; min-width: 100px;">
                     <span style="font-size: 1.8rem; font-weight: 800; display: block; line-height: 1; color: var(--accent);">11</span>
                     <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">OCT</span>
@@ -83,7 +83,7 @@ require_once 'includes/header.php';
             </div>
 
             <!-- Event 3: Pathfinder Induction -->
-            <div style="background-color: var(--bg-white); border-radius: 10px; border: 1px solid var(--border-color); padding: 2rem; display: flex; gap: 2rem; align-items: center; box-shadow: var(--shadow-sm);">
+            <div class="event-list-card">
                 <div style="background-color: var(--primary-dark); color: white; padding: 1rem; border-radius: 8px; text-align: center; min-width: 100px;">
                     <span style="font-size: 1.8rem; font-weight: 800; display: block; line-height: 1; color: var(--accent);">29</span>
                     <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">NOV</span>
