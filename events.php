@@ -64,37 +64,11 @@ require_once 'includes/header.php';
                     <p style="font-size: 0.95rem; color: var(--text-muted);">Join the youth for a refreshing hike and team-building at Kimakia Forest. Pack a lunch, carry some water, and wear comfortable hiking shoes!</p>
                 </div>
                 <!-- Photo placeholder for the hike -->
-                <div style="width: 150px; height: 150px; border-radius: 8px; background-color: #f1f5f9; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; text-align: center; background-image: url('assets/images/hike_photo.jpg'); background-size: cover; background-position: center;">
+                <div style="width: 150px; height: 150px; flex-shrink: 0; border-radius: 8px; background-color: #f1f5f9; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; text-align: center; background-image: url('assets/images/hike_photo.jpg'); background-size: cover; background-position: center;">
                 </div>
             </div>
 
-            <!-- Event 2: Youth Week of Prayer -->
-            <div class="event-list-card">
-                <div style="background-color: var(--primary-dark); color: white; padding: 1rem; border-radius: 8px; text-align: center; min-width: 100px;">
-                    <span style="font-size: 1.8rem; font-weight: 800; display: block; line-height: 1; color: var(--accent);">11</span>
-                    <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">OCT</span>
-                </div>
-                <div style="flex: 1;">
-                    <span style="background-color: rgba(8,43,67,0.1); color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem;">Youth / AY</span>
-                    <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.4rem;">District Youth Week of Prayer</h3>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.5rem;"><i class="fa-solid fa-clock"></i> 6:00 PM – 7:30 PM Daily (Oct 11th – Oct 17th)</p>
-                    <p style="font-size: 0.95rem; color: var(--text-muted);"><i class="fa-solid fa-location-dot"></i> District-wide Churches</p>
-                </div>
-            </div>
 
-            <!-- Event 3: Pathfinder Induction -->
-            <div class="event-list-card">
-                <div style="background-color: var(--primary-dark); color: white; padding: 1rem; border-radius: 8px; text-align: center; min-width: 100px;">
-                    <span style="font-size: 1.8rem; font-weight: 800; display: block; line-height: 1; color: var(--accent);">29</span>
-                    <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">NOV</span>
-                </div>
-                <div style="flex: 1;">
-                    <span style="background-color: rgba(46,133,64,0.1); color: #2e8540; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem;">Club / Pathfinder</span>
-                    <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.4rem;">Pathfinder & Adventurer Induction Ceremony</h3>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.5rem;"><i class="fa-solid fa-clock"></i> 9:00 AM – 1:00 PM</p>
-                    <p style="font-size: 0.95rem; color: var(--text-muted);"><i class="fa-solid fa-location-dot"></i> Membley Church Grounds</p>
-                </div>
-            </div>
 
         </div>
 
