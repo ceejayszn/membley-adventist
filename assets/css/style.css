@@ -1152,24 +1152,24 @@ textarea.form-control {
    EVENTS SECTION & LIME GREEN OUTLINE SHOWCASE
    ========================================= */
 .event-card-green-outline {
-    background: #041928 !important;
+    background: linear-gradient(145deg, #1f2937 0%, #111827 100%) !important;
     color: #ffffff !important;
     border: 2.5px solid #84cc16;
     border-radius: 16px;
     padding: 2rem;
     position: relative;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
     transition: var(--transition);
 }
 
 .event-card-green-outline:hover {
     border-color: #a3e635;
-    box-shadow: 0 10px 35px rgba(132, 204, 22, 0.2);
+    box-shadow: 0 12px 40px rgba(132, 204, 22, 0.25);
 }
 
 .badge-green-outline {
     background-color: #84cc16;
-    color: #041928 !important;
+    color: #0f172a !important;
     font-size: 0.8rem;
     font-weight: 800;
     text-transform: uppercase;
@@ -1185,7 +1185,7 @@ textarea.form-control {
    SEXY VIBRANT RESERVATION CARD & BUTTONS
    ========================================= */
 .event-rsvp-cta {
-    background: linear-gradient(135deg, #07233b 0%, #031422 100%);
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
     border: 2px solid #84cc16;
     border-radius: 16px;
     padding: 1.75rem 2rem;
@@ -1254,7 +1254,7 @@ textarea.form-control {
 
 .btn-fill-info:hover {
     background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
-    color: #041928 !important;
+    color: #0f172a !important;
     border-color: #a3e635;
     transform: translateY(-3px) scale(1.03);
     box-shadow: 0 10px 25px rgba(132, 204, 22, 0.5);
@@ -1316,18 +1316,18 @@ textarea.form-control {
 }
 
 .flyer-main-details {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #1e293b !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
     border-radius: 14px;
     padding: 1.75rem;
     display: flex;
     flex-direction: column;
     gap: 1.15rem;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
 }
 
 .flyer-main-details p {
-    color: #f1f5f9 !important;
+    color: #f8fafc !important;
     font-size: 0.95rem;
     line-height: 1.6;
     margin: 0;
@@ -1365,7 +1365,7 @@ textarea.form-control {
 
 .ribbon-10yrs {
     background: linear-gradient(135deg, #d97706, #f59e0b);
-    color: #041928 !important;
+    color: #0f172a !important;
     font-weight: 900;
     padding: 0.25rem 0.65rem;
     border-radius: 6px;
@@ -1381,7 +1381,7 @@ textarea.form-control {
 }
 
 .flyer-meta-card {
-    background: rgba(255, 255, 255, 0.08);
+    background: #0f172a !important;
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     padding: 0.85rem 1rem;
