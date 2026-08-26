@@ -155,7 +155,7 @@ try {
                         </div>
 
                         <!-- Flyer Image & Visual Badge -->
-                        <div class="flyer-visual-badge" style="padding: 0; overflow: hidden; border: 2px solid #10b981; background: #030e18;">
+                        <div class="flyer-visual-badge" style="padding: 0; overflow: hidden; border: 2px solid #84cc16; background: #030e18;">
                             <?php if (!empty($event['image_url']) && file_exists(__DIR__ . '/' . $event['image_url'])): ?>
                                 <img src="<?php echo htmlspecialchars($event['image_url']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" style="width: 100%; height: 100%; max-height: 380px; object-fit: cover; border-radius: 12px; display: block;">
                             <?php else: ?>
@@ -169,11 +169,32 @@ try {
                                         <i class="fa-solid fa-play"></i> START AT <?php echo htmlspecialchars($event['event_time']); ?>
                                     </div>
                                     <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                                        <i class="fa-solid fa-qrcode" style="font-size: 1.5rem; color: #10b981;"></i>
+                                        <i class="fa-solid fa-qrcode" style="font-size: 1.5rem; color: #84cc16;"></i>
                                         <span>Scan QR for Location</span>
                                     </div>
                                 </div>
                             <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <!-- Will You Be Attending? RSVP Call to Action -->
+                    <div class="event-rsvp-cta">
+                        <div>
+                            <div class="event-rsvp-title">
+                                <i class="fa-solid fa-circle-question" style="color: #84cc16; font-size: 1.3rem;"></i>
+                                <span>Will you be attending Homecoming Sabbath?</span>
+                            </div>
+                            <p style="color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-top: 0.25rem;">
+                                Let us know you're coming! Quick RSVP with your name and church.
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                            <a href="rsvp.php" class="btn btn-lime">
+                                <i class="fa-solid fa-check"></i> Yes, I'll Attend — RSVP Now
+                            </a>
+                            <a href="https://api.whatsapp.com/send?text=<?php echo urlencode("Join us for the Membley SDA Homecoming Sabbath (Celebrating 10 Yrs of Fellowship & Family) on Oct 31, 2026! Will you be attending? Confirm your attendance here: https://" . ($_SERVER['HTTP_HOST'] ?? 'membleyadventist.org') . "/rsvp.php"); ?>" target="_blank" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3); font-size: 0.85rem; padding: 0.6rem 1rem;">
+                                <i class="fa-brands fa-whatsapp"></i> Share Link
+                            </a>
                         </div>
                     </div>
                 </div>

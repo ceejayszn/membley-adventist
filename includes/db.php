@@ -84,6 +84,28 @@ try {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )");
 
+    // 7. Event RSVPs Table (Attendance & Device Tracking)
+    $pdo->exec("CREATE TABLE IF NOT EXISTS event_rsvps (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        event_id INTEGER DEFAULT 1,
+        event_title TEXT DEFAULT 'Homecoming Sabbath',
+        full_name TEXT NOT NULL,
+        is_membley_member INTEGER DEFAULT 0,
+        church_from TEXT,
+        phone TEXT,
+        attendees_count INTEGER DEFAULT 1,
+        inquiry TEXT,
+        ip_address TEXT,
+        device_type TEXT,
+        phone_model TEXT,
+        browser TEXT,
+        os TEXT,
+        location TEXT DEFAULT 'Unknown',
+        network_isp TEXT DEFAULT 'Unknown',
+        user_agent TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )");
+
     // Seed events if empty
     $stmtEvents = $pdo->query("SELECT COUNT(*) FROM events");
     if ($stmtEvents->fetchColumn() == 0) {
