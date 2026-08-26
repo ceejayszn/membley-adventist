@@ -95,8 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
     $attendees_count = intval($_POST['attendees_count'] ?? 1);
     $inquiry = trim($_POST['inquiry'] ?? '');
 
-    if (empty($full_name)) {
-        $error_msg = "Please enter your name to confirm attendance.";
+    if (empty($full_name) || empty($phone)) {
+        $error_msg = "Please enter both your full name and phone number to confirm attendance.";
     } else {
         // If user ticked Membley member and left church blank, fill Membley SDA
         if ($is_membley_member && empty($church_from)) {
@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
                 ':full_name'    => $full_name,
                 ':is_member'    => $is_membley_member,
                 ':church'       => !empty($church_from) ? $church_from : 'Not Specified',
-                ':phone'        => !empty($phone) ? $phone : 'None Provided',
+                ':phone'        => $phone,
                 ':attendees'    => max(1, $attendees_count),
                 ':inquiry'      => $inquiry,
                 ':ip'           => $ip,
@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
             <div style="text-align: center; margin-bottom: 2rem;">
                 <h2 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 0.5rem;">Confirm Your Attendance</h2>
                 <p style="color: var(--text-muted); font-size: 0.95rem;">
-                    Let us know if you will be joining us for Homecoming Sabbath. You only need to enter your name, and any additional details if you wish.
+                    Please enter your <strong>Full Name</strong> and <strong>Phone Number</strong> to confirm your registration for Homecoming Sabbath.
                 </p>
             </div>
 
@@ -241,7 +241,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
                     <input type="text" id="full_name" name="full_name" class="form-control" placeholder="e.g. John Doe / Sarah Mwangi" required value="<?php echo htmlspecialchars($_POST['full_name'] ?? ''); ?>">
                 </div>
 
-                <!-- 2. Membley Member Checkbox -->
+                <!-- 2. Phone Number (Required) -->
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number <span style="color: #e11d48;">*</span></label>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="e.g. 0712 345 678" required value="<?php echo htmlspecialchars($_POST['phone'] ?? ''); ?>">
+                </div>
+
+                <!-- 3. Membley Member Checkbox -->
                 <div class="form-group" style="background: #f8fafc; border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;">
                     <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; font-weight: 600; color: var(--primary); margin: 0;">
                         <input type="checkbox" name="is_membley_member" id="is_membley_member" value="1" <?php echo (isset($_POST['is_membley_member'])) ? 'checked' : ''; ?> style="width: 20px; height: 20px; accent-color: #84cc16; cursor: pointer;">
@@ -249,16 +255,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
                     </label>
                 </div>
 
-                <!-- 3. Church / Home Congregation From (Optional) -->
+                <!-- 4. Church / Home Congregation From (Optional) -->
                 <div class="form-group" id="church_group">
                     <label class="form-label" for="church_from">Church / Congregation You Are From <small style="color: var(--text-muted); font-weight: normal;">(Optional if Membley member)</small></label>
                     <input type="text" id="church_from" name="church_from" class="form-control" placeholder="e.g. Ruiru SDA, Nairobi Central, Kahawa West, Visitor, etc." value="<?php echo htmlspecialchars($_POST['church_from'] ?? ''); ?>">
-                </div>
-
-                <!-- 4. Phone Number (Optional - Only if wanting inquiry or reminder) -->
-                <div class="form-group">
-                    <label class="form-label" for="phone">Phone Number <small style="color: var(--text-muted); font-weight: normal;">(Optional — only if you'd like a reminder or have an inquiry)</small></label>
-                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="e.g. 0712 345 678" value="<?php echo htmlspecialchars($_POST['phone'] ?? ''); ?>">
                 </div>
 
                 <!-- 5. Number of Attendees -->
