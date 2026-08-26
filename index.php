@@ -110,10 +110,7 @@ try {
                 <div class="event-card-green-outline" style="margin-bottom: 2rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
                         <span class="badge-green-outline">
-                            <i class="fa-solid fa-bolt"></i> NEW UPCOMING EVENT
-                        </span>
-                        <span style="color: #10b981; font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem;">
-                            <i class="fa-regular fa-clock"></i> Active (Archives 2 Days Post Event)
+                            <i class="fa-solid fa-sparkles"></i> NEW UPCOMING EVENT
                         </span>
                     </div>
 
@@ -157,20 +154,26 @@ try {
                             </div>
                         </div>
 
-                        <!-- Flyer Date Visual Badge -->
-                        <div class="flyer-visual-badge">
-                            <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: #38bdf8; letter-spacing: 1px; margin-bottom: 0.5rem;">MEMBLEY ADVENTIST</div>
-                            <div class="flyer-date-pill">
-                                <span class="flyer-date-big"><?php echo $formatted_day; ?></span>
-                                <span class="flyer-date-month"><?php echo $formatted_month; ?></span>
-                            </div>
-                            <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 0.6rem; color: #ffffff; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">
-                                <i class="fa-solid fa-play"></i> START AT <?php echo htmlspecialchars($event['event_time']); ?>
-                            </div>
-                            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                                <i class="fa-solid fa-qrcode" style="font-size: 1.5rem; color: #10b981;"></i>
-                                <span>Scan QR for Location</span>
-                            </div>
+                        <!-- Flyer Image & Visual Badge -->
+                        <div class="flyer-visual-badge" style="padding: 0; overflow: hidden; border: 2px solid #10b981; background: #030e18;">
+                            <?php if (!empty($event['image_url']) && file_exists(__DIR__ . '/' . $event['image_url'])): ?>
+                                <img src="<?php echo htmlspecialchars($event['image_url']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" style="width: 100%; height: 100%; max-height: 380px; object-fit: cover; border-radius: 12px; display: block;">
+                            <?php else: ?>
+                                <div style="padding: 1.5rem;">
+                                    <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: #38bdf8; letter-spacing: 1px; margin-bottom: 0.5rem;">MEMBLEY ADVENTIST</div>
+                                    <div class="flyer-date-pill">
+                                        <span class="flyer-date-big"><?php echo $formatted_day; ?></span>
+                                        <span class="flyer-date-month"><?php echo $formatted_month; ?></span>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 0.6rem; color: #ffffff; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">
+                                        <i class="fa-solid fa-play"></i> START AT <?php echo htmlspecialchars($event['event_time']); ?>
+                                    </div>
+                                    <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                        <i class="fa-solid fa-qrcode" style="font-size: 1.5rem; color: #10b981;"></i>
+                                        <span>Scan QR for Location</span>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

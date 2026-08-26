@@ -83,7 +83,6 @@ try {
                         <div class="event-card-green-outline">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                                 <span class="badge-green-outline"><i class="fa-solid fa-sparkles"></i> Featured Upcoming Event</span>
-                                <span style="font-size: 0.8rem; color: #10b981; font-weight: 700;">Active Event</span>
                             </div>
                             <div class="event-flyer-box">
                                 <div class="flyer-main-details">
@@ -115,14 +114,20 @@ try {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flyer-visual-badge">
-                                    <div class="flyer-date-pill">
-                                        <span class="flyer-date-big"><?php echo $formatted_day; ?></span>
-                                        <span class="flyer-date-month"><?php echo date('M Y', strtotime($event['event_date'])); ?></span>
-                                    </div>
-                                    <div style="font-size: 0.85rem; color: white; font-weight: 700;">
-                                        <i class="fa-solid fa-location-dot" style="color: #10b981;"></i> <?php echo htmlspecialchars($event['location']); ?>
-                                    </div>
+                                <div class="flyer-visual-badge" style="padding: 0; overflow: hidden; border: 2px solid #10b981; background: #030e18;">
+                                    <?php if (!empty($event['image_url']) && file_exists(__DIR__ . '/' . $event['image_url'])): ?>
+                                        <img src="<?php echo htmlspecialchars($event['image_url']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" style="width: 100%; height: 100%; max-height: 380px; object-fit: cover; border-radius: 12px; display: block;">
+                                    <?php else: ?>
+                                        <div style="padding: 1.5rem;">
+                                            <div class="flyer-date-pill">
+                                                <span class="flyer-date-big"><?php echo $formatted_day; ?></span>
+                                                <span class="flyer-date-month"><?php echo date('M Y', strtotime($event['event_date'])); ?></span>
+                                            </div>
+                                            <div style="font-size: 0.85rem; color: white; font-weight: 700;">
+                                                <i class="fa-solid fa-location-dot" style="color: #10b981;"></i> <?php echo htmlspecialchars($event['location']); ?>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
