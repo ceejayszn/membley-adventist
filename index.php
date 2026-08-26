@@ -188,12 +188,12 @@ try {
                                 Let us know you're coming! Quick RSVP with your name and church.
                             </p>
                         </div>
-                        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                        <div style="display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center;">
                             <a href="rsvp.php" class="btn-fill-info">
-                                <i class="fa-solid fa-pen-to-square"></i> Fill Info
+                                <i class="fa-solid fa-pen-to-square"></i> Fill Info & RSVP
                             </a>
-                            <a href="https://api.whatsapp.com/send?text=<?php echo urlencode("Join us for the Membley SDA Homecoming Sabbath (Celebrating 10 Yrs of Fellowship & Family) on Oct 31, 2026! Will you be attending? Confirm your attendance here: https://" . ($_SERVER['HTTP_HOST'] ?? 'membleyadventist.org') . "/rsvp.php"); ?>" target="_blank" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3); font-size: 0.85rem; padding: 0.6rem 1rem;">
-                                <i class="fa-brands fa-whatsapp"></i> Share Link
+                            <a href="https://api.whatsapp.com/send?text=<?php echo urlencode("Join us for the Membley SDA Homecoming Sabbath (Celebrating 10 Yrs of Fellowship & Family) on Oct 31, 2026! Will you be attending? Confirm your attendance here: https://" . ($_SERVER['HTTP_HOST'] ?? 'membleyadventist.org') . "/rsvp.php"); ?>" target="_blank" class="btn-whatsapp-share">
+                                <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i> Share on WhatsApp
                             </a>
                         </div>
                     </div>
