@@ -253,8 +253,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
 
             <!-- Action Buttons -->
             <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center;">
-                <a href="https://api.whatsapp.com/send?text=<?php echo urlencode("Hello! I just confirmed my attendance for the Membley SDA Homecoming Sabbath (Celebrating 10 Yrs of Fellowship & Family) on Oct 31, 2026. Will you be attending too? Register here: https://" . ($_SERVER['HTTP_HOST'] ?? 'membleyadventist.org') . "/rsvp.php"); ?>" target="_blank" class="btn btn-lime" style="width: 100%; max-width: 380px;">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Invite a Friend on WhatsApp
+                <a href="https://api.whatsapp.com/send?text=<?php echo urlencode("Hello! I just confirmed my attendance for the Membley SDA Homecoming Sabbath (Celebrating 10 Yrs of Fellowship & Family) on Oct 31, 2026. Will you be attending too? Register here: https://" . ($_SERVER['HTTP_HOST'] ?? 'membleyadventist.org') . "/rsvp.php"); ?>" target="_blank" class="btn-whatsapp-share" style="width: 100%; max-width: 380px;">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i> Invite a Friend on WhatsApp
                 </a>
                 
                 <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem;">
