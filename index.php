@@ -189,8 +189,8 @@ try {
                             </p>
                         </div>
                         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                            <a href="rsvp.php" class="btn btn-lime">
-                                <i class="fa-solid fa-check"></i> Yes, I'll Attend — RSVP Now
+                            <a href="rsvp.php" class="btn-fill-info">
+                                <i class="fa-solid fa-pen-to-square"></i> Fill Info
                             </a>
                             <a href="https://api.whatsapp.com/send?text=<?php echo urlencode("Join us for the Membley SDA Homecoming Sabbath (Celebrating 10 Yrs of Fellowship & Family) on Oct 31, 2026! Will you be attending? Confirm your attendance here: https://" . ($_SERVER['HTTP_HOST'] ?? 'membleyadventist.org') . "/rsvp.php"); ?>" target="_blank" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3); font-size: 0.85rem; padding: 0.6rem 1rem;">
                                 <i class="fa-brands fa-whatsapp"></i> Share Link
@@ -219,11 +219,6 @@ try {
             <p style="color: var(--text-muted);">No upcoming events scheduled right now. Check back soon!</p>
         </div>
     <?php endif; ?>
-
-    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
-        <a href="events.php" class="btn btn-primary"><i class="fa-solid fa-calendar-days"></i> View All Events</a>
-        <a href="past-events.php" class="btn btn-outline"><i class="fa-solid fa-box-archive"></i> View Past Events Archive</a>
-    </div>
 </section>
 
 <!-- Welcome Section -->

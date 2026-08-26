@@ -28,24 +28,11 @@ try {
     </div>
 </section>
 
-<!-- Sub Navigation Bar -->
-<div style="background-color: var(--bg-white); border-bottom: 1px solid var(--border-color); padding: 1rem 0;">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <div style="display: flex; gap: 0.75rem;">
-            <a href="events.php" class="btn btn-primary btn-sm"><i class="fa-solid fa-calendar-star"></i> Upcoming Events</a>
-            <a href="past-events.php" class="btn btn-outline btn-sm"><i class="fa-solid fa-box-archive"></i> Past Events Archive</a>
-        </div>
-        <div style="font-size: 0.85rem; color: var(--text-muted);">
-            <i class="fa-solid fa-circle-info"></i> Events auto-move to archive 2 days after event date
-        </div>
-    </div>
-</div>
-
 <!-- Filterable Events -->
 <section class="section-padding container">
     <div class="responsive-flex-events">
         
-        <!-- Left: Sidebar Service Info & Archive Quick Link -->
+        <!-- Left: Sidebar Service Info & Quick Contact at Bottom -->
         <div class="responsive-flex-events-sidebar">
             <div style="background-color: var(--bg-white); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
                 <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Regular Worship</h3>
@@ -54,13 +41,8 @@ try {
                     <li><strong>Fridays:</strong> 6:00 PM – 7:00 PM (Vespers)</li>
                 </ul>
             </div>
-            
-            <div style="background-color: var(--bg-white); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Event Archives</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Looking for past church convocations and camp meetings?</p>
-                <a href="past-events.php" class="btn btn-outline btn-sm" style="width: 100%;"><i class="fa-solid fa-clock-rotate-left"></i> View Past Events</a>
-            </div>
 
+            <!-- Quick Contact at Bottom -->
             <div style="background-color: var(--bg-white); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
                 <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Quick Contact</h3>
                 <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Have questions about an upcoming event? Contact our clerk's office.</p>
@@ -143,8 +125,8 @@ try {
                                     </p>
                                 </div>
                                 <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                                    <a href="rsvp.php" class="btn btn-lime">
-                                        <i class="fa-solid fa-check"></i> Yes, I'll Attend — RSVP Now
+                                    <a href="rsvp.php" class="btn-fill-info">
+                                        <i class="fa-solid fa-pen-to-square"></i> Fill Info
                                     </a>
                                     <a href="https://api.whatsapp.com/send?text=<?php echo urlencode("Join us for the Membley SDA Homecoming Sabbath (Celebrating 10 Yrs of Fellowship & Family) on Oct 31, 2026! Will you be attending? Confirm your attendance here: https://" . ($_SERVER['HTTP_HOST'] ?? 'membleyadventist.org') . "/rsvp.php"); ?>" target="_blank" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3); font-size: 0.85rem; padding: 0.6rem 1rem;">
                                         <i class="fa-brands fa-whatsapp"></i> Share Link

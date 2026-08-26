@@ -67,8 +67,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
             <li><a href="index.php" class="mobile-nav-link">Home</a></li>
             <li><a href="about.php" class="mobile-nav-link">About</a></li>
             <li><a href="ministries.php" class="mobile-nav-link">Ministries</a></li>
-            <li><a href="events.php" class="mobile-nav-link">Upcoming Events</a></li>
-            <li><a href="past-events.php" class="mobile-nav-link">Past Events Archive</a></li>
+            <li><a href="events.php" class="mobile-nav-link">Events</a></li>
             <li><a href="blog.php" class="mobile-nav-link">Blog & Sermons</a></li>
             <li><a href="giving.php" class="mobile-nav-link">Giving / Pledges</a></li>
             <li><a href="members.php" class="mobile-nav-link">Members / Registrations</a></li>
