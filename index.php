@@ -157,18 +157,22 @@ try {
                         <!-- Flyer Image & Visual Badge (FULL UNCROPPED) -->
                         <div class="flyer-poster-wrapper">
                             <?php if (!empty($event['image_url']) && file_exists(__DIR__ . '/' . $event['image_url'])): ?>
-                                <img src="<?php echo htmlspecialchars($event['image_url']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" class="flyer-poster-img">
+                                <a href="events.php" title="Click to view event details and RSVP" style="display: block; width: 100%; max-width: 440px; text-decoration: none;">
+                                    <img src="<?php echo htmlspecialchars($event['image_url']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" class="flyer-poster-img">
+                                </a>
                             <?php else: ?>
-                                <div style="padding: 1.5rem; background: #030e18; border-radius: 12px; border: 2px solid #84cc16; text-align: center;">
-                                    <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: #38bdf8; letter-spacing: 1px; margin-bottom: 0.5rem;">MEMBLEY ADVENTIST</div>
-                                    <div class="flyer-date-pill">
-                                        <span class="flyer-date-big"><?php echo $formatted_day; ?></span>
-                                        <span class="flyer-date-month"><?php echo $formatted_month; ?></span>
+                                <a href="events.php" style="text-decoration: none; display: block; width: 100%;">
+                                    <div style="padding: 1.5rem; background: #030e18; border-radius: 12px; border: 2px solid #84cc16; text-align: center;">
+                                        <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: #38bdf8; letter-spacing: 1px; margin-bottom: 0.5rem;">MEMBLEY ADVENTIST</div>
+                                        <div class="flyer-date-pill">
+                                            <span class="flyer-date-big"><?php echo $formatted_day; ?></span>
+                                            <span class="flyer-date-month"><?php echo $formatted_month; ?></span>
+                                        </div>
+                                        <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 0.6rem; color: #ffffff; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">
+                                            <i class="fa-solid fa-play"></i> START AT <?php echo htmlspecialchars($event['event_time']); ?>
+                                        </div>
                                     </div>
-                                    <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 0.6rem; color: #ffffff; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">
-                                        <i class="fa-solid fa-play"></i> START AT <?php echo htmlspecialchars($event['event_time']); ?>
-                                    </div>
-                                </div>
+                                </a>
                             <?php endif; ?>
                         </div>
                     </div>

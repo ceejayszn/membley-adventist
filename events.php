@@ -92,17 +92,21 @@ try {
                             <!-- Right: Poster Display Box (UNCROPPED FULL) -->
                             <div class="flyer-poster-wrapper">
                                 <?php if (!empty($event['image_url']) && file_exists(__DIR__ . '/' . $event['image_url'])): ?>
-                                    <img src="<?php echo htmlspecialchars($event['image_url']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" class="flyer-poster-img">
+                                    <a href="rsvp.php" title="Click to RSVP & Confirm Attendance" style="display: block; width: 100%; max-width: 440px; text-decoration: none;">
+                                        <img src="<?php echo htmlspecialchars($event['image_url']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" class="flyer-poster-img">
+                                    </a>
                                 <?php else: ?>
-                                    <div style="padding: 1.5rem; background: #030e18; border-radius: 12px; border: 2px solid #84cc16; text-align: center;">
-                                        <div class="flyer-date-pill">
-                                            <span class="flyer-date-big"><?php echo $formatted_day; ?></span>
-                                            <span class="flyer-date-month"><?php echo date('M Y', strtotime($event['event_date'])); ?></span>
+                                    <a href="rsvp.php" style="text-decoration: none; display: block; width: 100%;">
+                                        <div style="padding: 1.5rem; background: #030e18; border-radius: 12px; border: 2px solid #84cc16; text-align: center;">
+                                            <div class="flyer-date-pill">
+                                                <span class="flyer-date-big"><?php echo $formatted_day; ?></span>
+                                                <span class="flyer-date-month"><?php echo date('M Y', strtotime($event['event_date'])); ?></span>
+                                            </div>
+                                            <div style="font-size: 0.85rem; color: white; font-weight: 700;">
+                                                <i class="fa-solid fa-location-dot" style="color: #84cc16;"></i> <?php echo htmlspecialchars($event['location']); ?>
+                                            </div>
                                         </div>
-                                        <div style="font-size: 0.85rem; color: white; font-weight: 700;">
-                                            <i class="fa-solid fa-location-dot" style="color: #84cc16;"></i> <?php echo htmlspecialchars($event['location']); ?>
-                                        </div>
-                                    </div>
+                                    </a>
                                 <?php endif; ?>
                             </div>
                         </div>
