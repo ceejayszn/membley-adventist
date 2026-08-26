@@ -69,6 +69,76 @@ try {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )");
 
+    // 6. Events Table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS events (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        subtitle TEXT,
+        description TEXT,
+        event_date DATE NOT NULL,
+        event_time TEXT,
+        location TEXT,
+        category TEXT DEFAULT 'General',
+        is_featured INTEGER DEFAULT 0,
+        image_url TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    // Seed events if empty
+    $stmtEvents = $pdo->query("SELECT COUNT(*) FROM events");
+    if ($stmtEvents->fetchColumn() == 0) {
+        $seedEvents = [
+            [
+                'title' => 'Homecoming Sabbath',
+                'subtitle' => 'Celebrating 10 Yrs of Fellowship and Family',
+                'description' => 'Membley Adventist presents Homecoming Sabbath celebrating 10 years of fellowship and family! Join us for a monumental Sabbath of thanksgiving, praise, and community gathering at Membley Park Estate.',
+                'event_date' => '2026-10-31',
+                'event_time' => '8:00 AM',
+                'location' => 'Membley Park Estate, Ruiru, Kenya',
+                'category' => '10th Anniversary Convocation',
+                'is_featured' => 1,
+                'image_url' => 'assets/images/homecoming_flyer.png'
+            ],
+            [
+                'title' => 'Annual Church Camp Meeting 2026',
+                'subtitle' => 'Special Convocation',
+                'description' => 'Annual Church Camp Meeting 2026 filled with spiritual enrichment, inspirational speakers, health lectures, and uplifting choir music for the whole family.',
+                'event_date' => '2026-08-16',
+                'event_time' => '8:00 AM – 5:00 PM Daily',
+                'location' => 'Membley SDA Church Sanctuary',
+                'category' => 'Special Convocation',
+                'is_featured' => 0,
+                'image_url' => 'https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&q=80&w=800'
+            ],
+            [
+                'title' => 'Youth Hike to KIMAKIA Forest',
+                'subtitle' => 'AY Outdoor Fellowship',
+                'description' => 'Join the youth for a refreshing hike and team-building at Kimakia Forest. Pack a lunch, carry some water, and wear comfortable hiking shoes!',
+                'event_date' => '2026-07-19',
+                'event_time' => '7:00 AM Departure',
+                'location' => 'KIMAKIA Forest, Murang\'a',
+                'category' => 'Youth / AY',
+                'is_featured' => 0,
+                'image_url' => 'assets/images/hike_photo.jpg'
+            ]
+        ];
+
+        $insertEvent = $pdo->prepare("INSERT INTO events (title, subtitle, description, event_date, event_time, location, category, is_featured, image_url) VALUES (:title, :subtitle, :description, :event_date, :event_time, :location, :category, :is_featured, :image_url)");
+        foreach ($seedEvents as $e) {
+            $insertEvent->execute([
+                ':title' => $e['title'],
+                ':subtitle' => $e['subtitle'],
+                ':description' => $e['description'],
+                ':event_date' => $e['event_date'],
+                ':event_time' => $e['event_time'],
+                ':location' => $e['location'],
+                ':category' => $e['category'],
+                ':is_featured' => $e['is_featured'],
+                ':image_url' => $e['image_url']
+            ]);
+        }
+    }
+
     // Insert default admin if users table is empty (admin / admin123)
     $stmt = $pdo->query("SELECT COUNT(*) FROM users");
     if ($stmt->fetchColumn() == 0) {

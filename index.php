@@ -11,6 +11,22 @@ try {
 } catch (PDOException $e) {
     // Gracefully handle query issue if any
 }
+
+// Fetch upcoming events (active until 2 days after event_date)
+$upcoming_events = [];
+try {
+    $stmt = $pdo->query("SELECT * FROM events ORDER BY event_date ASC");
+    $all_events = $stmt->fetchAll();
+    $today = date('Y-m-d');
+    foreach ($all_events as $ev) {
+        $expiry_date = date('Y-m-d', strtotime($ev['event_date'] . ' +2 days'));
+        if ($today <= $expiry_date) {
+            $upcoming_events[] = $ev;
+        }
+    }
+} catch (PDOException $e) {
+    // Gracefully handle query issue if any
+}
 ?>
 
 <!-- Hero Slider Section -->
@@ -72,6 +88,117 @@ try {
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- Upcoming Events Showcase Section (Before Welcome Section) -->
+<section class="section-padding container" id="events-showcase">
+    <div class="section-header" style="margin-bottom: 2.5rem;">
+        <span class="section-subtitle"><i class="fa-solid fa-calendar-star"></i> Upcoming Events & Convocations</span>
+        <h2 class="section-title">What's Happening at Membley SDA</h2>
+    </div>
+
+    <?php if (!empty($upcoming_events)): ?>
+        <?php foreach ($upcoming_events as $index => $event): ?>
+            <?php 
+                $is_new = ($event['is_featured'] == 1 || $index == 0);
+                $formatted_day = date('d', strtotime($event['event_date']));
+                $formatted_month = date('M Y', strtotime($event['event_date']));
+            ?>
+            <?php if ($is_new): ?>
+                <!-- Green Outline Featured Card Showcase -->
+                <div class="event-card-green-outline" style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                        <span class="badge-green-outline">
+                            <i class="fa-solid fa-bolt"></i> NEW UPCOMING EVENT
+                        </span>
+                        <span style="color: #10b981; font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                            <i class="fa-regular fa-clock"></i> Active (Archives 2 Days Post Event)
+                        </span>
+                    </div>
+
+                    <div class="event-flyer-box">
+                        <!-- Main Flyer Text Details -->
+                        <div class="flyer-main-details">
+                            <span class="flyer-presenter"><i class="fa-solid fa-church"></i> <?php echo htmlspecialchars(!empty($event['subtitle']) ? 'MEMBLEY ADVENTIST PRESENTS' : 'MEMBLEY SDA CHURCH'); ?></span>
+                            <h3 class="flyer-title"><?php echo htmlspecialchars($event['title']); ?></h3>
+                            <?php if (!empty($event['subtitle'])): ?>
+                                <div class="flyer-subtitle">
+                                    <span class="ribbon-10yrs"><i class="fa-solid fa-ribbon"></i> CELEBRATING 10 YRS</span>
+                                    <span>OF FELLOWSHIP AND FAMILY</span>
+                                </div>
+                            <?php endif; ?>
+                            <p style="color: rgba(255,255,255,0.85); font-size: 1rem; margin-top: 0.5rem;">
+                                <?php echo htmlspecialchars($event['description']); ?>
+                            </p>
+
+                            <div class="flyer-meta-grid">
+                                <div class="flyer-meta-card">
+                                    <div class="flyer-meta-icon"><i class="fa-solid fa-calendar-day"></i></div>
+                                    <div class="flyer-meta-text">
+                                        <small>Date</small>
+                                        <strong><?php echo date('d M Y (l)', strtotime($event['event_date'])); ?></strong>
+                                    </div>
+                                </div>
+                                <div class="flyer-meta-card">
+                                    <div class="flyer-meta-icon"><i class="fa-solid fa-clock"></i></div>
+                                    <div class="flyer-meta-text">
+                                        <small>Start Time</small>
+                                        <strong><?php echo htmlspecialchars($event['event_time']); ?></strong>
+                                    </div>
+                                </div>
+                                <div class="flyer-meta-card" style="grid-column: 1 / -1;">
+                                    <div class="flyer-meta-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                    <div class="flyer-meta-text">
+                                        <small>Venue Location</small>
+                                        <strong><?php echo htmlspecialchars($event['location']); ?></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Flyer Date Visual Badge -->
+                        <div class="flyer-visual-badge">
+                            <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: #38bdf8; letter-spacing: 1px; margin-bottom: 0.5rem;">MEMBLEY ADVENTIST</div>
+                            <div class="flyer-date-pill">
+                                <span class="flyer-date-big"><?php echo $formatted_day; ?></span>
+                                <span class="flyer-date-month"><?php echo $formatted_month; ?></span>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 0.6rem; color: #ffffff; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">
+                                <i class="fa-solid fa-play"></i> START AT <?php echo htmlspecialchars($event['event_time']); ?>
+                            </div>
+                            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                <i class="fa-solid fa-qrcode" style="font-size: 1.5rem; color: #10b981;"></i>
+                                <span>Scan QR for Location</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <!-- Additional Standard Event Card -->
+                <div class="event-list-card" style="margin-bottom: 1.5rem;">
+                    <div style="background-color: var(--primary-dark); color: white; padding: 1rem; border-radius: 8px; text-align: center; min-width: 90px;">
+                        <span style="font-size: 1.6rem; font-weight: 800; display: block; line-height: 1; color: var(--accent);"><?php echo $formatted_day; ?></span>
+                        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;"><?php echo date('M', strtotime($event['event_date'])); ?></span>
+                    </div>
+                    <div style="flex: 1;">
+                        <span style="background-color: rgba(16,185,129,0.12); color: #059669; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 4px; display: inline-block; margin-bottom: 0.4rem;"><?php echo htmlspecialchars($event['category']); ?></span>
+                        <h3 style="color: var(--primary); margin-bottom: 0.4rem; font-size: 1.25rem;"><?php echo htmlspecialchars($event['title']); ?></h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem;"><i class="fa-solid fa-clock"></i> <?php echo htmlspecialchars($event['event_time']); ?></p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);"><i class="fa-solid fa-location-dot"></i> <?php echo htmlspecialchars($event['location']); ?></p>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <div style="text-align: center; padding: 2rem; background: var(--bg-white); border-radius: 12px; border: 1px solid var(--border-color);">
+            <p style="color: var(--text-muted);">No upcoming events scheduled right now. Check back soon!</p>
+        </div>
+    <?php endif; ?>
+
+    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+        <a href="events.php" class="btn btn-primary"><i class="fa-solid fa-calendar-days"></i> View All Events</a>
+        <a href="past-events.php" class="btn btn-outline"><i class="fa-solid fa-box-archive"></i> View Past Events Archive</a>
     </div>
 </section>
 

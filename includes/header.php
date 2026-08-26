@@ -45,7 +45,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
                 <li><a href="index.php" class="nav-link <?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Home</a></li>
                 <li><a href="about.php" class="nav-link <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>">About</a></li>
                 <li><a href="ministries.php" class="nav-link <?php echo ($current_page == 'ministries.php') ? 'active' : ''; ?>">Ministries</a></li>
-                <li><a href="events.php" class="nav-link <?php echo ($current_page == 'events.php') ? 'active' : ''; ?>">Events/Announcements</a></li>
+                <li><a href="events.php" class="nav-link <?php echo ($current_page == 'events.php' || $current_page == 'past-events.php') ? 'active' : ''; ?>">Events/Announcements</a></li>
                 <li><a href="blog.php" class="nav-link <?php echo ($current_page == 'blog.php' || $current_page == 'blog-single.php') ? 'active' : ''; ?>">Blog / Sermons</a></li>
                 <li><a href="giving.php" class="nav-link <?php echo ($current_page == 'giving.php') ? 'active' : ''; ?>">Giving</a></li>
                 <li><a href="members.php" class="nav-link <?php echo ($current_page == 'members.php') ? 'active' : ''; ?>">Members</a></li>
@@ -67,7 +67,8 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
             <li><a href="index.php" class="mobile-nav-link">Home</a></li>
             <li><a href="about.php" class="mobile-nav-link">About</a></li>
             <li><a href="ministries.php" class="mobile-nav-link">Ministries</a></li>
-            <li><a href="events.php" class="mobile-nav-link">Events</a></li>
+            <li><a href="events.php" class="mobile-nav-link">Upcoming Events</a></li>
+            <li><a href="past-events.php" class="mobile-nav-link">Past Events Archive</a></li>
             <li><a href="blog.php" class="mobile-nav-link">Blog & Sermons</a></li>
             <li><a href="giving.php" class="mobile-nav-link">Giving / Pledges</a></li>
             <li><a href="members.php" class="mobile-nav-link">Members / Registrations</a></li>
