@@ -115,7 +115,7 @@ try {
                         <div class="event-rsvp-cta" style="margin-top: 2rem;">
                             <div>
                                 <div class="event-rsvp-title">
-                                    <i class="fa-solid fa-circle-check" style="color: #84cc16; font-size: 1.3rem;"></i>
+                                    <i class="fa-solid fa-circle-check" style="color: var(--accent); font-size: 1.3rem;"></i>
                                     <span>Reserve Your Seat for Homecoming Sabbath</span>
                                 </div>
                                 <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-top: 0.25rem;">

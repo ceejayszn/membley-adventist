@@ -186,15 +186,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
 ?>
 
 <!-- Banner Section -->
-<section style="background-color: var(--primary-dark); color: white; padding: 3rem 0; text-align: center; background-image: linear-gradient(rgba(4,25,40,0.88), rgba(4,25,40,0.88)), url('assets/images/church_banner.png'); background-size: cover; background-position: center;">
+<section style="background-color: var(--primary-dark); color: white; padding: 3rem 0; text-align: center; background-image: linear-gradient(rgba(0,26,53,0.9), rgba(0,26,53,0.9)), url('assets/images/church_banner.png'); background-size: cover; background-position: center;">
     <div class="container">
-        <span style="background-color: #84cc16; color: #041928; font-weight: 800; text-transform: uppercase; font-size: 0.8rem; padding: 0.35rem 0.85rem; border-radius: 50px; display: inline-block; margin-bottom: 0.75rem; letter-spacing: 0.5px;">
+        <span style="background-color: var(--accent); color: var(--primary-dark); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; padding: 0.35rem 0.85rem; border-radius: 4px; display: inline-block; margin-bottom: 0.75rem; letter-spacing: 0.5px;">
             <i class="fa-solid fa-calendar-check"></i> Homecoming Registration
         </span>
         <h1 style="color: white; font-size: 2.3rem; margin-bottom: 0.4rem;">Will You Be Attending?</h1>
         <p style="color: rgba(255,255,255,0.85); font-size: 1rem; max-width: 600px; margin: 0 auto;">
             <strong>Homecoming Sabbath</strong> — Celebrating 10 Yrs of Fellowship and Family<br>
-            <span style="color: #a3e635; font-weight: 700;"><i class="fa-solid fa-calendar-day"></i> Sabbath, 31 OCT 2026 | Starts 8:00 AM</span>
+            <span style="color: var(--accent); font-weight: 700;"><i class="fa-solid fa-calendar-day"></i> Sabbath, 31 OCT 2026 | Starts 8:00 AM</span>
         </p>
     </div>
 </section>
@@ -204,16 +204,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
 
     <?php if ($submitted): ?>
         
-        <!-- Floating Balloons Animation Container -->
-        <div class="balloon-container" id="balloonContainer">
-            <span class="balloon" style="left: 10%; animation-delay: 0s;">🎈</span>
-            <span class="balloon" style="left: 25%; animation-delay: 0.8s;">🎉</span>
-            <span class="balloon" style="left: 40%; animation-delay: 0.3s;">🎈</span>
-            <span class="balloon" style="left: 60%; animation-delay: 1.2s;">✨</span>
-            <span class="balloon" style="left: 75%; animation-delay: 0.5s;">🎈</span>
-            <span class="balloon" style="left: 88%; animation-delay: 1.5s;">🎉</span>
-        </div>
-
         <!-- Thank You Confirmation Card -->
         <div class="rsvp-thankyou-card">
             
@@ -223,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
                 Thank You, <?php echo htmlspecialchars($registered_name); ?>!
             </h2>
             
-            <p style="font-size: 1.25rem; font-weight: 700; color: #65a30d; margin-bottom: 1.25rem;">
+            <p style="font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem;">
                 ✨ Feel at the feet of Jesus ✨
             </p>
 
@@ -232,19 +222,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
             </p>
 
             <!-- Scripture Quote Card -->
-            <div class="scripture-card">
-                <div class="scripture-verse">
+            <div style="background-color: var(--primary-dark); color: #ffffff; border-left: 4px solid var(--accent); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; text-align: left;">
+                <div style="font-family: var(--font-heading); font-size: 1.05rem; font-style: italic; line-height: 1.6; color: #f1f5f9; margin-bottom: 0.5rem;">
                     "Come, let us sing for joy to the Lord; let us shout aloud to the Rock of our salvation. Let us come before him with thanksgiving and extol him with music and song."
                 </div>
-                <div class="scripture-ref">
+                <div style="color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">
                     <i class="fa-solid fa-book-bible"></i> Psalm 95:1–2
                 </div>
             </div>
 
             <!-- Event Details Pill -->
-            <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 1.25rem; margin: 1.5rem 0; text-align: left;">
+            <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; text-align: left;">
                 <h4 style="color: var(--primary); margin-bottom: 0.6rem; font-size: 0.95rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
-                    <i class="fa-solid fa-location-dot" style="color: #84cc16;"></i> Event Information
+                    <i class="fa-solid fa-location-dot" style="color: var(--accent);"></i> Event Information
                 </h4>
                 <p style="font-size: 0.9rem; margin-bottom: 0.25rem;"><strong>Date:</strong> Sabbath, 31 October 2026</p>
                 <p style="font-size: 0.9rem; margin-bottom: 0.25rem;"><strong>Time:</strong> Starts at 8:00 AM</p>
@@ -281,8 +271,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
             <?php endif; ?>
 
             <!-- Welcome Header -->
-            <div style="background: rgba(132, 204, 22, 0.12); border: 1.5px solid #84cc16; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.85rem;">
-                <span style="font-size: 2rem;">😊</span>
+            <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.75rem; display: flex; align-items: center; gap: 0.85rem;">
+                <span style="font-size: 1.8rem;">😊</span>
                 <div>
                     <strong style="color: var(--primary); display: block; font-size: 1.05rem;">You are warmly welcomed!</strong>
                     <small style="color: var(--text-dark); font-size: 0.9rem;">Please enter your details below to confirm attendance for Homecoming Sabbath.</small>

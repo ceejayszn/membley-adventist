@@ -181,7 +181,7 @@ try {
                     <div class="event-rsvp-cta">
                         <div>
                             <div class="event-rsvp-title">
-                                <i class="fa-solid fa-circle-question" style="color: #84cc16; font-size: 1.3rem;"></i>
+                                <i class="fa-solid fa-circle-question" style="color: var(--accent); font-size: 1.3rem;"></i>
                                 <span>Will you be attending Homecoming Sabbath?</span>
                             </div>
                             <p style="color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-top: 0.25rem;">
