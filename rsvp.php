@@ -93,8 +93,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
     $attendees_count = intval($_POST['attendees_count'] ?? 1);
     $inquiry = trim($_POST['inquiry'] ?? '');
 
+    // Collect additional attendees names if count > 1
+    $additional_names = [];
+    if ($attendees_count > 1) {
+        for ($i = 2; $i <= $attendees_count; $i++) {
+            $att_name = trim($_POST["attendee_name_{$i}"] ?? '');
+            if (!empty($att_name)) {
+                $additional_names[] = "Attendee {$i}: {$att_name}";
+            }
+        }
+    }
+
+    // Validation
     if (empty($full_name) || empty($phone)) {
         $error_msg = "Please enter both your Full Name and Phone Number to confirm attendance.";
+    } elseif ($attendees_count > 1 && count($additional_names) < ($attendees_count - 1)) {
+        $error_msg = "Please provide the names for all additional attendees.";
     } else {
         if ($is_membley_member == 1 && empty($church_from)) {
             $church_from = "Membley SDA Church";
@@ -130,6 +144,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
             }
         }
 
+        // Prepare full attendee notes
+        $notes_text = $inquiry;
+        if (!empty($additional_names)) {
+            $names_list = implode(", ", $additional_names);
+            $notes_text = (!empty($notes_text) ? $notes_text . " | " : "") . "[Group Members: " . $names_list . "]";
+        }
+
         try {
             $stmt = $pdo->prepare("INSERT INTO event_rsvps 
                 (event_id, event_title, full_name, is_membley_member, church_from, phone, attendees_count, inquiry, ip_address, device_type, phone_model, browser, os, location, network_isp, user_agent)
@@ -144,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
                 ':church'       => !empty($church_from) ? $church_from : 'Visitor',
                 ':phone'        => $phone,
                 ':attendees'    => max(1, $attendees_count),
-                ':inquiry'      => $inquiry,
+                ':inquiry'      => $notes_text,
                 ':ip'           => $ip,
                 ':device_type'  => $device_info['device_type'],
                 ':phone_model'  => $device_info['phone_model'],
@@ -207,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
             </p>
 
             <p style="font-size: 1rem; color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.6;">
-                Your attendance for the <strong>Homecoming Sabbath (10 Yrs Celebration)</strong> is confirmed. We cannot wait to welcome and praise God together with you!
+                Your attendance for the <strong>Homecoming Sabbath (10 Yrs Celebration)</strong> is confirmed. We look forward to fellowshipping and praising God together with you!
             </p>
 
             <!-- Scripture Quote Card -->
@@ -245,12 +266,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
 
     <?php else: ?>
 
-        <!-- Event Poster Display -->
-        <div style="max-width: 440px; margin: 0 auto 2rem auto; text-align: center;">
-            <img src="assets/images/homecoming_flyer.png" alt="Homecoming Sabbath 10 Yrs Poster" style="width: 100%; border-radius: 14px; border: 2.5px solid #84cc16; box-shadow: 0 8px 25px rgba(0,0,0,0.25); display: block;">
+        <!-- Event Poster Display (FULL UNCROPPED) -->
+        <div style="max-width: 480px; margin: 0 auto 2.5rem auto; text-align: center;">
+            <img src="assets/images/homecoming_flyer.png" alt="Homecoming Sabbath 10 Yrs Poster" class="flyer-poster-img">
         </div>
 
-        <!-- RSVP Interactive Box -->
+        <!-- RSVP Form Box -->
         <div class="rsvp-box-card" id="rsvpCard">
             
             <?php if (!empty($error_msg)): ?>
@@ -259,52 +280,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
                 </div>
             <?php endif; ?>
 
-            <!-- STEP 1: Will you be attending? (YES / NO) -->
-            <div id="step1_choice" style="text-align: center; padding: 1rem 0;">
-                <h2 style="color: var(--primary); font-size: 1.7rem; margin-bottom: 0.5rem;">
-                    Will you be attending Homecoming Sabbath?
-                </h2>
-                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.75rem;">
-                    Celebrating 10 Years of Fellowship & Family at Membley Park Estate, Ruiru.
-                </p>
-
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <button type="button" id="btnYes" class="btn btn-lime" style="font-size: 1.05rem; padding: 0.85rem 1.75rem;">
-                        😊 YES, I'LL ATTEND
-                    </button>
-                    <button type="button" id="btnNo" class="btn btn-outline" style="font-size: 1.05rem; padding: 0.85rem 1.75rem; border-color: #94a3b8; color: #64748b;">
-                        🥺 NO, I CAN'T
-                    </button>
+            <!-- Welcome Header -->
+            <div style="background: rgba(132, 204, 22, 0.12); border: 1.5px solid #84cc16; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.85rem;">
+                <span style="font-size: 2rem;">😊</span>
+                <div>
+                    <strong style="color: var(--primary); display: block; font-size: 1.05rem;">You are warmly welcomed!</strong>
+                    <small style="color: var(--text-dark); font-size: 0.9rem;">Please enter your details below to confirm attendance for Homecoming Sabbath.</small>
                 </div>
             </div>
 
-            <!-- "NO" Message Modal/Box -->
-            <div id="noMessageBox" class="rsvp-step hidden" style="text-align: center; padding: 2rem 1rem; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1; margin-top: 1rem;">
-                <div style="font-size: 3rem; margin-bottom: 0.5rem;">🥺</div>
-                <h3 style="color: var(--primary); font-size: 1.4rem; margin-bottom: 0.5rem;">Please attend!</h3>
-                <p style="color: var(--text-dark); font-size: 1rem; max-width: 480px; margin: 0 auto 1.5rem auto; line-height: 1.5;">
-                    We would truly love to have you with us as we celebrate God's grace and 10 years of fellowship. We hope you can make it!
-                </p>
-                <button type="button" id="btnChangeMind" class="btn btn-lime">
-                    😊 Change Mind — I'll Attend!
-                </button>
-            </div>
-
-            <!-- MAIN REGISTRATION FORM -->
-            <form action="rsvp.php" method="POST" id="mainRsvpForm" class="rsvp-step hidden" style="margin-top: 1.5rem;">
+            <!-- REGISTRATION FORM -->
+            <form action="rsvp.php" method="POST" id="mainRsvpForm">
                 
-                <!-- Welcome Banner -->
-                <div style="background: rgba(132, 204, 22, 0.12); border: 1px solid #84cc16; border-radius: 10px; padding: 0.9rem 1.2rem; margin-bottom: 1.75rem; display: flex; align-items: center; gap: 0.75rem;">
-                    <span style="font-size: 1.8rem;">😊</span>
-                    <div>
-                        <strong style="color: var(--primary); display: block; font-size: 1rem;">You are warmly welcomed!</strong>
-                        <small style="color: var(--text-dark);">Please enter your name and phone number to complete your RSVP.</small>
-                    </div>
-                </div>
-
                 <!-- 1. Full Name (Required) -->
                 <div class="form-group">
-                    <label class="form-label" for="full_name">Full Name <span style="color: #e11d48;">*</span></label>
+                    <label class="form-label" for="full_name">Your Full Name <span style="color: #e11d48;">*</span></label>
                     <input type="text" id="full_name" name="full_name" class="form-control" placeholder="e.g. John Doe / Sarah Mwangi" required value="<?php echo htmlspecialchars($_POST['full_name'] ?? ''); ?>">
                 </div>
 
@@ -318,49 +308,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
                 <div class="form-group">
                     <label class="form-label">Are you a Membley SDA Member?</label>
                     <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                        <input type="hidden" name="is_membley_member" id="is_membley_member" value="0">
-                        <button type="button" id="btnMemberYes" class="choice-chip">
+                        <input type="hidden" name="is_membley_member" id="is_membley_member" value="<?php echo (isset($_POST['is_membley_member']) && $_POST['is_membley_member'] == 1) ? '1' : '0'; ?>">
+                        <button type="button" id="btnMemberYes" class="choice-chip <?php echo (isset($_POST['is_membley_member']) && $_POST['is_membley_member'] == 1) ? 'active' : ''; ?>">
                             <i class="fa-solid fa-church"></i> I am a Membley SDA Member
                         </button>
-                        <button type="button" id="btnMemberVisitor" class="choice-chip active">
+                        <button type="button" id="btnMemberVisitor" class="choice-chip <?php echo (!isset($_POST['is_membley_member']) || $_POST['is_membley_member'] == 0) ? 'active' : ''; ?>">
                             <i class="fa-solid fa-hand-holding-heart"></i> I am a Visitor / Other Church
                         </button>
                     </div>
                 </div>
 
-                <!-- 4. Church / Congregation Section (If visitor) -->
+                <!-- 4. Manual Church Input -->
                 <div class="form-group" id="churchSection">
-                    <label class="form-label" for="church_from">Previous / Home Church You Are From:</label>
-                    
-                    <!-- Quick Select Chips -->
-                    <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem;">
-                        <span class="choice-chip church-pill" data-church="Ruiru SDA">Ruiru SDA</span>
-                        <span class="choice-chip church-pill" data-church="Nairobi Central">Nairobi Central</span>
-                        <span class="choice-chip church-pill" data-church="Kahawa West SDA">Kahawa West SDA</span>
-                        <span class="choice-chip church-pill" data-church="Juja SDA">Juja SDA</span>
-                        <span class="choice-chip church-pill" data-church="Githurai SDA">Githurai SDA</span>
-                        <span class="choice-chip church-pill" data-church="Visiting Guest">Guest / Visitor</span>
-                    </div>
-
-                    <input type="text" id="church_from" name="church_from" class="form-control" placeholder="Type or click a church above" value="<?php echo htmlspecialchars($_POST['church_from'] ?? ''); ?>">
+                    <label class="form-label" for="church_from">Church / Congregation You Are From:</label>
+                    <input type="text" id="church_from" name="church_from" class="form-control" placeholder="Type your church or home congregation (e.g. Ruiru SDA, Nairobi Central, Kahawa West, etc.)" value="<?php echo htmlspecialchars($_POST['church_from'] ?? ''); ?>">
                 </div>
 
                 <!-- 5. Number of Attendees -->
                 <div class="form-group">
-                    <label class="form-label" for="attendees_count">Number of Attendees <small style="color: var(--text-muted); font-weight: normal;">(You + friends/family)</small></label>
+                    <label class="form-label" for="attendees_count">Number of Attendees <small style="color: var(--text-muted); font-weight: normal;">(You + friends/family joining)</small></label>
                     <select id="attendees_count" name="attendees_count" class="form-control">
-                        <option value="1" selected>1 Person (Just Me)</option>
-                        <option value="2">2 Persons</option>
-                        <option value="3">3 Persons</option>
-                        <option value="4">4 Persons</option>
-                        <option value="5">5+ Persons (Family / Group)</option>
+                        <option value="1" <?php echo (($_POST['attendees_count'] ?? 1) == 1) ? 'selected' : ''; ?>>1 Person (Just Me)</option>
+                        <option value="2" <?php echo (($_POST['attendees_count'] ?? 1) == 2) ? 'selected' : ''; ?>>2 Persons</option>
+                        <option value="3" <?php echo (($_POST['attendees_count'] ?? 1) == 3) ? 'selected' : ''; ?>>3 Persons</option>
+                        <option value="4" <?php echo (($_POST['attendees_count'] ?? 1) == 4) ? 'selected' : ''; ?>>4 Persons</option>
+                        <option value="5" <?php echo (($_POST['attendees_count'] ?? 1) >= 5) ? 'selected' : ''; ?>>5 Persons (Group / Family)</option>
                     </select>
+                </div>
+
+                <!-- Dynamic Additional Attendees Names Container -->
+                <div id="additionalAttendeesBox" style="display: none; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                    <h4 style="color: var(--primary); font-size: 0.95rem; margin-bottom: 0.75rem;">
+                        <i class="fa-solid fa-users" style="color: #84cc16;"></i> Please enter the names of additional attendees:
+                    </h4>
+                    <div id="additionalNamesInputs" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <!-- Dynamically populated -->
+                    </div>
                 </div>
 
                 <!-- 6. Inquiry / Questions / Prayer Box (Editable) -->
                 <div class="form-group">
                     <label class="form-label" for="inquiry">Any Inquiries, Questions or Special Prayer Requests? <small style="color: var(--text-muted); font-weight: normal;">(Optional)</small></label>
-                    <textarea id="inquiry" name="inquiry" class="form-control" rows="3" placeholder="Feel free to write any inquiry or special note here..."><?php echo htmlspecialchars($_POST['inquiry'] ?? ''); ?></textarea>
+                    <textarea id="inquiry" name="inquiry" class="form-control" rows="3" placeholder="Feel free to write any inquiry, question or special note here..."><?php echo htmlspecialchars($_POST['inquiry'] ?? ''); ?></textarea>
                 </div>
 
                 <!-- Submit Button -->
@@ -378,55 +367,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_rsvp'])) {
 </section>
 
 <script>
-// Interactive Client-side flow (Fast, lightweight Vanilla JS)
 document.addEventListener('DOMContentLoaded', function() {
-    const btnYes = document.getElementById('btnYes');
-    const btnNo = document.getElementById('btnNo');
-    const btnChangeMind = document.getElementById('btnChangeMind');
-    const step1 = document.getElementById('step1_choice');
-    const noMessageBox = document.getElementById('noMessageBox');
-    const mainRsvpForm = document.getElementById('mainRsvpForm');
-
     const btnMemberYes = document.getElementById('btnMemberYes');
     const btnMemberVisitor = document.getElementById('btnMemberVisitor');
     const isMemberInput = document.getElementById('is_membley_member');
     const churchSection = document.getElementById('churchSection');
     const churchInput = document.getElementById('church_from');
-    const churchPills = document.querySelectorAll('.church-pill');
+    const attendeesSelect = document.getElementById('attendees_count');
+    const additionalBox = document.getElementById('additionalAttendeesBox');
+    const additionalInputs = document.getElementById('additionalNamesInputs');
 
-    // 1. Click YES -> Open Form
-    if (btnYes) {
-        btnYes.addEventListener('click', function() {
-            if (noMessageBox) noMessageBox.classList.add('hidden');
-            if (step1) step1.classList.add('hidden');
-            if (mainRsvpForm) {
-                mainRsvpForm.classList.remove('hidden');
-                document.getElementById('full_name').focus();
-            }
-        });
-    }
-
-    // 2. Click NO -> Show "Please attend 🥺" message
-    if (btnNo) {
-        btnNo.addEventListener('click', function() {
-            if (mainRsvpForm) mainRsvpForm.classList.add('hidden');
-            if (noMessageBox) noMessageBox.classList.remove('hidden');
-        });
-    }
-
-    // 3. Click Change Mind -> Open Form
-    if (btnChangeMind) {
-        btnChangeMind.addEventListener('click', function() {
-            if (noMessageBox) noMessageBox.classList.add('hidden');
-            if (step1) step1.classList.add('hidden');
-            if (mainRsvpForm) {
-                mainRsvpForm.classList.remove('hidden');
-                document.getElementById('full_name').focus();
-            }
-        });
-    }
-
-    // 4. Membership toggle
+    // 1. Membership toggle
     if (btnMemberYes && btnMemberVisitor) {
         btnMemberYes.addEventListener('click', function() {
             btnMemberYes.classList.add('active');
@@ -445,20 +396,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 5. Quick church pill selection
-    churchPills.forEach(pill => {
-        pill.addEventListener('click', function() {
-            churchPills.forEach(p => p.classList.remove('active'));
-            this.classList.add('active');
-            churchInput.value = this.getAttribute('data-church');
-        });
-    });
+    // 2. Dynamic Additional Attendee Names when count > 1
+    function updateAttendeeFields() {
+        if (!attendeesSelect || !additionalBox || !additionalInputs) return;
+        const count = parseInt(attendeesSelect.value) || 1;
+        
+        if (count > 1) {
+            additionalBox.style.display = 'block';
+            additionalInputs.innerHTML = '';
+            
+            for (let i = 2; i <= count; i++) {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <label style="font-size: 0.85rem; font-weight: 600; color: var(--primary); display: block; margin-bottom: 0.25rem;">
+                        Attendee ${i} Full Name <span style="color: #e11d48;">*</span>
+                    </label>
+                    <input type="text" name="attendee_name_${i}" class="form-control" placeholder="e.g. Full Name of Attendee ${i}" required>
+                `;
+                additionalInputs.appendChild(div);
+            }
+        } else {
+            additionalBox.style.display = 'none';
+            additionalInputs.innerHTML = '';
+        }
+    }
 
-    // Auto-reveal form if there was a server-side error
-    <?php if (!empty($error_msg)): ?>
-        if (step1) step1.classList.add('hidden');
-        if (mainRsvpForm) mainRsvpForm.classList.remove('hidden');
-    <?php endif; ?>
+    if (attendeesSelect) {
+        attendeesSelect.addEventListener('change', updateAttendeeFields);
+        updateAttendeeFields();
+    }
 });
 </script>
 

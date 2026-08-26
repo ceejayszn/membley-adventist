@@ -89,12 +89,12 @@ try {
                                 </div>
                             </div>
 
-                            <!-- Right: Poster Display Box -->
-                            <div class="flyer-visual-badge" style="padding: 0; overflow: hidden; border: 2.5px solid #84cc16; background: #030e18; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+                            <!-- Right: Poster Display Box (UNCROPPED FULL) -->
+                            <div class="flyer-poster-wrapper">
                                 <?php if (!empty($event['image_url']) && file_exists(__DIR__ . '/' . $event['image_url'])): ?>
-                                    <img src="<?php echo htmlspecialchars($event['image_url']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" style="width: 100%; height: auto; max-height: 420px; object-fit: cover; border-radius: 12px; display: block;">
+                                    <img src="<?php echo htmlspecialchars($event['image_url']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" class="flyer-poster-img">
                                 <?php else: ?>
-                                    <div style="padding: 1.5rem;">
+                                    <div style="padding: 1.5rem; background: #030e18; border-radius: 12px; border: 2px solid #84cc16; text-align: center;">
                                         <div class="flyer-date-pill">
                                             <span class="flyer-date-big"><?php echo $formatted_day; ?></span>
                                             <span class="flyer-date-month"><?php echo date('M Y', strtotime($event['event_date'])); ?></span>
