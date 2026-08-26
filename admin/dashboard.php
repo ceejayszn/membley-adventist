@@ -11,6 +11,7 @@ try {
     $contact_count = $pdo->query("SELECT COUNT(*) FROM submissions WHERE type = 'contact' AND status = 'unread'")->fetchColumn();
     $prayer_count = $pdo->query("SELECT COUNT(*) FROM submissions WHERE type = 'prayer' AND status = 'unread'")->fetchColumn();
     $pledge_count = $pdo->query("SELECT COUNT(*) FROM submissions WHERE type = 'pledge' AND status = 'unread'")->fetchColumn();
+    $member_reg_count = $pdo->query("SELECT COUNT(*) FROM submissions WHERE type = 'member_registration' AND status = 'unread'")->fetchColumn();
     
     // Fetch 5 latest submissions
     $stmt = $pdo->query("SELECT * FROM submissions ORDER BY created_at DESC LIMIT 5");
@@ -28,6 +29,7 @@ try {
     $contact_count = 0;
     $prayer_count = 0;
     $pledge_count = 0;
+    $member_reg_count = 0;
     $recent_submissions = [];
     $total_views = 0;
     $total_clicks = 0;
@@ -55,6 +57,7 @@ try {
             <ul class="sidebar-menu">
                 <li><a href="dashboard.php" class="sidebar-link active"><i class="fa-solid fa-gauge" style="margin-right: 0.5rem;"></i> Dashboard</a></li>
                 <li><a href="rsvps.php" class="sidebar-link"><i class="fa-solid fa-calendar-check" style="margin-right: 0.5rem;"></i> Event RSVPs</a></li>
+                <li><a href="members.php" class="sidebar-link"><i class="fa-solid fa-users" style="margin-right: 0.5rem;"></i> Members</a></li>
                 <li><a href="forms.php" class="sidebar-link"><i class="fa-solid fa-wpforms" style="margin-right: 0.5rem;"></i> Manage Forms</a></li>
                 <li><a href="analytics.php" class="sidebar-link"><i class="fa-solid fa-chart-line" style="margin-right: 0.5rem;"></i> Visitor Analytics</a></li>
                 <li><a href="blogs.php" class="sidebar-link"><i class="fa-solid fa-newspaper" style="margin-right: 0.5rem;"></i> Manage Blogs</a></li>
@@ -92,6 +95,10 @@ try {
                     <div class="stat-card">
                         <div class="stat-label">Pledges Received</div>
                         <div class="stat-val" style="color: #1e40af;"><?php echo $pledge_count; ?></div>
+                    </div>
+                    <div class="stat-card" style="border-top: 4px solid var(--primary-light);">
+                        <div class="stat-label">New Member Regs</div>
+                        <div class="stat-val" style="color: var(--primary-light);"><?php echo $member_reg_count; ?></div>
                     </div>
                 </div>
 

@@ -1,7 +1,16 @@
 <?php
 // includes/db.php
 
-$db_file = __DIR__ . '/church.db';
+// Use /data/church.db on Docker/Render (persistent disk) — fallback to includes/ for local dev
+if (is_dir('/data') && is_writable('/data')) {
+    $db_file = '/data/church.db';
+    // On first deploy, seed from bundled DB if /data/church.db doesn't exist yet
+    if (!file_exists($db_file) && file_exists(__DIR__ . '/church.db')) {
+        @copy(__DIR__ . '/church.db', $db_file);
+    }
+} else {
+    $db_file = __DIR__ . '/church.db';
+}
 
 try {
     // Connect to SQLite database (will be created automatically if not exists)
@@ -11,6 +20,10 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_TIMEOUT => 5
     ]);
+
+    // Enable WAL mode for better concurrency and crash safety
+    $pdo->exec("PRAGMA journal_mode=WAL");
+    $pdo->exec("PRAGMA foreign_keys=ON");
 
     // Create tables if they do not exist
     

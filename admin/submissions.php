@@ -5,6 +5,14 @@ check_auth();
 
 require_once '../includes/db.php';
 
+// Human-readable type labels
+$type_labels = [
+    'member_registration' => 'Member Reg',
+    'pledge'              => 'Pledge',
+    'prayer'              => 'Prayer',
+    'contact'             => 'Contact',
+];
+
 $filter_type = isset($_GET['type']) ? $_GET['type'] : '';
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -100,6 +108,7 @@ try {
             <ul class="sidebar-menu">
                 <li><a href="dashboard.php" class="sidebar-link"><i class="fa-solid fa-gauge" style="margin-right: 0.5rem;"></i> Dashboard</a></li>
                 <li><a href="rsvps.php" class="sidebar-link"><i class="fa-solid fa-calendar-check" style="margin-right: 0.5rem;"></i> Event RSVPs</a></li>
+                <li><a href="members.php" class="sidebar-link"><i class="fa-solid fa-users" style="margin-right: 0.5rem;"></i> Members</a></li>
                 <li><a href="forms.php" class="sidebar-link"><i class="fa-solid fa-wpforms" style="margin-right: 0.5rem;"></i> Manage Forms</a></li>
                 <li><a href="analytics.php" class="sidebar-link"><i class="fa-solid fa-chart-line" style="margin-right: 0.5rem;"></i> Visitor Analytics</a></li>
                 <li><a href="blogs.php" class="sidebar-link"><i class="fa-solid fa-newspaper" style="margin-right: 0.5rem;"></i> Manage Blogs</a></li>
@@ -165,7 +174,7 @@ try {
                                             <td><?php echo date('M d, Y H:i', strtotime($sub['created_at'])); ?></td>
                                             <td>
                                                 <span class="badge badge-<?php echo htmlspecialchars($sub['type']); ?>">
-                                                    <?php echo ucfirst(htmlspecialchars($sub['type'])); ?>
+                                                    <?php echo htmlspecialchars($type_labels[$sub['type']] ?? ucfirst(str_replace('_', ' ', $sub['type']))); ?>
                                                 </span>
                                             </td>
                                             <td style="font-weight: 600;"><?php echo htmlspecialchars($sub['name']); ?></td>
